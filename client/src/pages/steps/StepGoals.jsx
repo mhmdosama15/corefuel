@@ -20,7 +20,7 @@ const StepGoals = () => {
   };
   return (
     <div className="flex flex-col text-center gap-3">
-      <h2>What are your main goals?</h2>
+      <h2 className="font-bold">What are your main goals?</h2>
       <p>Select up to 4 that matches your plans</p>
       <div className="grid gap-2">
         {goals.map((goal, index) => (

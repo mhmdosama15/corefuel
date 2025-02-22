@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 
-const StepSplit = () => {
-  const splits = ["Push, Pull, Legs", "Upper, Lower", "Bro split"];
-  const [selectedSplits, setSelectedSplits] = useState([]);
-  const addSplit = (split) => {
-    if (selectedSplits.includes(split)) {
-      setSelectedSplits(selectedSplits.filter((sp) => sp !== split));
+const StepPhase = () => {
+  const phases = [
+    "Lean Bulk : Gaining muscle with a bit of fat ",
+    "Shredding : losing a good amount of fat ",
+    "Body Compostion: Gaining muscles with the fewest amount of fat gained   ",
+  ];
+  const [selectedPhase, setSelectedPhase] = useState([]);
+  const addPhase = (phase) => {
+    if (selectedPhase.includes(phase)) {
+      setSelectedPhase(selectedPhase.filter((ph) => ph !== phase));
     } else {
-      setSelectedSplits([...selectedSplits, split]);
+      setSelectedPhase([...selectedPhase, phase]);
     }
   };
   return (
@@ -20,18 +24,18 @@ const StepSplit = () => {
         available
       </p>
       <div className="grid gap-2">
-        {splits.map((split, index) => (
+        {phases.map((phase, index) => (
           <button
             key={index}
-            onClick={() => addSplit(split)}
-            disabled={selectedSplits.length >= 4}
+            onClick={() => addPhase(phase)}
+            disabled={selectedPhase.length >= 4}
             className={`flex items-center justify-center py-2 px-4 rounded-lg text-center transition duration-300 ${
-              selectedSplits.includes(split)
+              selectedPhase.includes(phase)
                 ? "bg-blue-500 text-white"
                 : "bg-white text-black border border-gray-300"
             }`}
           >
-            <span>{split}</span>
+            <span>{phase}</span>
           </button>
         ))}
       </div>
@@ -39,4 +43,4 @@ const StepSplit = () => {
   );
 };
 
-export default StepSplit;
+export default StepPhase;

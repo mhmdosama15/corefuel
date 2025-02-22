@@ -20,7 +20,9 @@ const StepStruggle = () => {
   };
   return (
     <div className="flex flex-col text-center gap-3">
-      <h2>Previously what have you been struggling the most with?</h2>
+      <h2 className="font-bold">
+        Previously what have you been struggling the most with?
+      </h2>
       <p>Select all that apply</p>
       <div className="grid gap-2">
         {struggles.map((struggle, index) => (
