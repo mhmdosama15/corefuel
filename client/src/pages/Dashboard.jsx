@@ -2,7 +2,7 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col px-30 gap-6 pt-24">
+    <div className="flex flex-col px-30 pb-30 gap-6 pt-20">
       <div className="grid grid-cols-2  gap-10">
         <div className="flex items-center gap-4">
           {" "}

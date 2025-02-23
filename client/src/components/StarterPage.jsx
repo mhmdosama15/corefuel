@@ -15,7 +15,7 @@ const StarterPage = () => {
   const nextStep = () => setStep((prev) => prev + 1);
   const previousStep = () => setStep((prev) => Math.max(1, prev - 1));
   return (
-    <div className="flex  items-center justify-center h-full">
+    <div className="flex flex-col gap-10 items-center justify-center h-screen border  w-full">
       <div className="flex flex-col min-h-[32rem] min-w-[32rem] max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
         {step === 1 && <StepName />}
         {step === 2 && <StepGoals />}

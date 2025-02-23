@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
-    <div className="flex  items-center justify-center h-full">
+    <div className="flex flex-col gap-10 items-center justify-center h-screen w-full">
       <div className="flex flex-col min-h-[32rem] min-w-[32rem] max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
         <div className="flex flex-col gap-4">
           <h2>Almost there! Create your account</h2>

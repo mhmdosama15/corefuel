@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import StarterPage from "./components/StarterPage";
 import { Link, useLocation } from "react-router-dom";
@@ -11,13 +8,16 @@ import Username from "./pages/register/Username";
 import Home from "./pages/Home";
 import MaybeShowComponent from "./components/MaybeShowComponent";
 import Dashboard from "./pages/Dashboard";
+import Exercise from "./pages/Exercise";
+import Calorie from "./pages/Calorie";
+import Nutrition from "./pages/Nutrition";
 
 function App() {
   const location = useLocation();
   return (
     <>
       <div
-        className={`flex flex-col  2xl:mx-auto 2xl:container w-screen h-full pb-30`}
+        className={`flex flex-col  2xl:mx-auto 2xl:container w-screen h-full `}
       >
         <MaybeShowComponent>
           <Navbar />
@@ -25,6 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/exercise" element={<Exercise />} />
+          <Route path="/calories" element={<Calorie />} />
+          <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/starter" element={<StarterPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/username" element={<Username />} />
