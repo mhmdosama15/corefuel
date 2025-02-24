@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Exercise = () => {
   const today = new Date().toISOString().slice(0, 10);
@@ -15,9 +16,12 @@ const Exercise = () => {
       <div className="flex items-start border-b border-b-[#dadada] pb-10 gap-44">
         <div className="flex flex-col gap-4">
           <p>Cardiovascular</p>
-          <button className="border border-[#dadada] bg-blue-500 text-white">
+          <Link
+            to={"/exercise/create"}
+            className="border border-[#dadada] bg-blue-500 text-white"
+          >
             Add Exercise
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-2 text-center gap-1  ">
           <div className="border rounded bg-blue-500 text-white text-center px-4 py-1">
@@ -32,10 +36,13 @@ const Exercise = () => {
       </div>
       <div className="flex items-start border-b border-b-[#dadada] pb-10 gap-44">
         <div className="flex flex-col gap-4">
-          <p>Strenght Training</p>
-          <button className="border border-[#dadada] bg-blue-500 text-white">
+          <p>Strength Training</p>
+          <Link
+            to={"/exercise/create"}
+            className="border border-[#dadada] bg-blue-500 text-white"
+          >
             Add Exercise
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-3 text-center  gap-1">
           <div className="border rounded bg-blue-500 text-white text-center px-4 py-1">

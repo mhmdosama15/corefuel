@@ -17,7 +17,9 @@ const Navbar = () => {
       >
         <div className="flex flex-col h-full pt-4 w-full">
           <div className="px-30 pb-4 flex items-center justify-between w-full">
-            <h2 className="text-2xl">CoreFuel</h2>
+            <Link to={"/"} className="text-2xl">
+              CoreFuel
+            </Link>
             {isLoggedIn && (
               <div className="flex items-center gap-3 text-sm">
                 <p>Hi, Osama</p>

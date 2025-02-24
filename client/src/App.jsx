@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Exercise from "./pages/Exercise";
 import Calorie from "./pages/Calorie";
 import Nutrition from "./pages/Nutrition";
+import ExerciseForm from "./pages/ExerciseForm";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/exercise" element={<Exercise />} />
+          <Route path="/exercise/create" element={<ExerciseForm />} />
           <Route path="/calories" element={<Calorie />} />
           <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/starter" element={<StarterPage />} />
