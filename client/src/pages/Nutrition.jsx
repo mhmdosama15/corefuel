@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Nutrition = () => {
   const today = new Date().toISOString().slice(0, 10);
@@ -17,9 +18,12 @@ const Nutrition = () => {
       <div className="flex items-start  justify-between border-b border-b-[#dadada] pb-2 gap-44">
         <div className="flex flex-col gap-4">
           <p>Breakfast</p>
-          <button className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white">
+          <Link
+            to={"/food"}
+            className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white"
+          >
             Add Food
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-5 text-center gap-1  ">
           {foodData.map((item, index) => (
@@ -38,27 +42,36 @@ const Nutrition = () => {
       <div className="flex items-start  justify-between border-b border-b-[#dadada] pb-2 gap-44">
         <div className="flex flex-col gap-4">
           <p>Lunch</p>
-          <button className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white">
+          <Link
+            to={"/food"}
+            className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white"
+          >
             Add Food
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-5 text-center gap-1  "></div>
       </div>{" "}
       <div className="flex items-start  justify-between border-b border-b-[#dadada] pb-2 gap-44">
         <div className="flex flex-col gap-4">
           <p>Dinner</p>
-          <button className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white">
+          <Link
+            to={"/food"}
+            className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white"
+          >
             Add Food
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-5 text-center gap-1  "></div>
       </div>{" "}
       <div className="flex items-start  justify-between border-b border-b-[#dadada] pb-2 gap-44">
         <div className="flex flex-col gap-4">
           <p>Snacks</p>
-          <button className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white">
+          <Link
+            to={"/food"}
+            className="border border-[#dadada] px-4 py-1 rounded-md bg-blue-500 text-white"
+          >
             Add Food
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-5 text-center gap-1  "></div>
       </div>

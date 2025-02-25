@@ -5,7 +5,15 @@ import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 const Navbar = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const paths = ["/dashboard", "/exercise", "/calories", "/nutrition"];
+  const paths = [
+    "/dashboard",
+    "/exercise",
+    "/calories",
+    "/nutrition",
+    "/exercise/create",
+    "/food",
+    "/settings",
+  ];
   return (
     <>
       <nav
@@ -23,8 +31,15 @@ const Navbar = () => {
             {isLoggedIn && (
               <div className="flex items-center gap-3 text-sm">
                 <p>Hi, Osama</p>
-                <Link>Settings</Link>
-                <Link>Logout</Link>
+                <Link
+                  to={"/settings"}
+                  className="text-blue-500 hover:text-blue-700 font-bold"
+                >
+                  Settings
+                </Link>
+                <Link className="text-blue-500 hover:text-blue-700 font-bold">
+                  Logout
+                </Link>
                 <div className="flex items-center gap-1">
                   <p>Follow Us:</p>
                   <Link>
@@ -38,21 +53,36 @@ const Navbar = () => {
             )}
           </div>
           {isLoggedIn && (
-            <div className="px-30  border border-transparent bg-blue-500 p-2  w-full">
-              <ul className="flex items-center gap-10 text-white py-2">
-                <li>
-                  <Link to={"/dashboard"}>My HOME</Link>
-                </li>
-                <li>
-                  <Link to={"/exercise"}>EXERCISE</Link>
-                </li>
-                <li>
-                  <Link to={"/calories"}>CALORIE</Link>
-                </li>
-                <li>
-                  <Link to={"/nutrition"}>NUTRITION</Link>
-                </li>
-              </ul>
+            <div className="px-30  border border-transparent bg-blue-500   w-full">
+              <div className="flex items-center  text-white ">
+                <Link
+                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  to={"/dashboard"}
+                >
+                  My HOME
+                </Link>
+
+                <Link
+                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  to={"/exercise"}
+                >
+                  EXERCISE
+                </Link>
+
+                <Link
+                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  to={"/calories"}
+                >
+                  CALORIE
+                </Link>
+
+                <Link
+                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  to={"/nutrition"}
+                >
+                  NUTRITION
+                </Link>
+              </div>
             </div>
           )}
         </div>

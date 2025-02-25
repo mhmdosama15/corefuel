@@ -12,6 +12,9 @@ import Exercise from "./pages/Exercise";
 import Calorie from "./pages/Calorie";
 import Nutrition from "./pages/Nutrition";
 import ExerciseForm from "./pages/ExerciseForm";
+import Food from "./pages/Food";
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
 
 function App() {
   const location = useLocation();
@@ -29,9 +32,12 @@ function App() {
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/exercise/create" element={<ExerciseForm />} />
           <Route path="/calories" element={<Calorie />} />
+          <Route path="/food" element={<Food />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/starter" element={<StarterPage />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup/username" element={<Username />} />
         </Routes>
       </div>

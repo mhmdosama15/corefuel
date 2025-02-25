@@ -6,7 +6,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-2  gap-10">
         <div className="flex items-center gap-4">
           {" "}
-          <div className="flex rounded-full border h-16 w-16"></div>
+          <div className="flex rounded-full border h-16 w-16 bg-blue-500 text-center items-center text-white justify-center uppercase">
+            OM
+          </div>
           <h2>Osama</h2>
         </div>
 

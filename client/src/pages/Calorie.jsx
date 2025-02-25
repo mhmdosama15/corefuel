@@ -48,7 +48,10 @@ const Calorie = () => {
               className="border px-4 py-2 border-[#dadada] w-full bg-white"
             />
           </div>
-          <button type="submit" className="border bg-blue-500 text-white">
+          <button
+            type="submit"
+            className="border bg-blue-500 px-4 py-2 rounded hover:bg-blue-700 text-white"
+          >
             Calculate{" "}
           </button>
         </form>

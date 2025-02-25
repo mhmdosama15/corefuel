@@ -18,7 +18,7 @@ const Exercise = () => {
           <p>Cardiovascular</p>
           <Link
             to={"/exercise/create"}
-            className="border border-[#dadada] bg-blue-500 text-white"
+            className="border border-[#dadada] px-4 py-2 hover:bg-blue-700 bg-blue-500 text-white"
           >
             Add Exercise
           </Link>
@@ -39,7 +39,7 @@ const Exercise = () => {
           <p>Strength Training</p>
           <Link
             to={"/exercise/create"}
-            className="border border-[#dadada] bg-blue-500 text-white"
+            className="border border-[#dadada] px-4 py-2 hover:bg-blue-700 bg-blue-500 text-white"
           >
             Add Exercise
           </Link>
@@ -62,7 +62,7 @@ const Exercise = () => {
       <div className="flex flex-col gap-4">
         <p>Today's Exercise Notes</p>
         <div className="flex justify-end">
-          <button className="border cursor-pointer border-[#dadada] bg-blue-500 text-white">
+          <button className="border cursor-pointer border-[#dadada] px-4 py-2 hover:bg-blue-700 bg-blue-500 text-white">
             Edit Note
           </button>
         </div>

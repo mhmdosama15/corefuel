@@ -2,9 +2,9 @@ import React from "react";
 
 const ExerciseForm = () => {
   return (
-    <div className="flex flex-col px-30 pb-30 gap-6 pt-44">
+    <div className="flex flex-col px-30 pb-30 gap-6 pt-24">
       <h2>Create New Exercise</h2>
-      <form className="flex justify-between w-3/4 gap-10  p-6 bg-[#dadada] rounded">
+      <form className="flex justify-between w-3/4 gap-10  p-6 bg-white shadow-sm border border-[#dadada] rounded">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-3">
             <label htmlFor="exercise-name" className="text-lg font-bold">
@@ -12,7 +12,7 @@ const ExerciseForm = () => {
             </label>
             <input
               id="exercise-name"
-              className="bg-white rounded w-72  px-4 py-2"
+              className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
             />
           </div>
           <div className="flex flex-col gap-3">
@@ -21,7 +21,7 @@ const ExerciseForm = () => {
             </label>
             <select
               id="exericse-type"
-              className="bg-white rounded w-72  px-4 py-2"
+              className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
             >
               <option>Cardio</option>
               <option>Strength</option>
@@ -35,7 +35,7 @@ const ExerciseForm = () => {
               <input
                 id="mins"
                 type="number"
-                className="bg-white rounded  px-4 py-2"
+                className="bg-white border border-[#dadada] rounded  px-4 py-2"
               />
               <span>Minutes</span>
             </div>
@@ -48,7 +48,7 @@ const ExerciseForm = () => {
               <input
                 id="calories"
                 type="number"
-                className="bg-white rounded  px-4 py-2"
+                className="bg-white border border-[#dadada] rounded  px-4 py-2"
               />
               <span>kcal</span>
             </div>
