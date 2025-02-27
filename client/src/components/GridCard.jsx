@@ -7,7 +7,7 @@ const GridCard = ({ title, picture }) => {
         <img
           src={picture}
           alt=""
-          className="h-full w-full rounded-lg object-cover"
+          className="h-full w-full max-h-[17rem] max-w-[20rem] rounded-lg object-cover"
         />
       </div>
       <p className=" text-xl">{title}</p>

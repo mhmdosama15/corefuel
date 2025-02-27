@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Username = () => {
   return (
-    <div className="flex flex-col gap-10 items-center justify-center  h-screen w-full">
-      <div className="flex flex-col min-h-[32rem] min-w-[32rem] max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
+    <div className="flex flex-col gap-10 items-center justify-center px-6 xl:px-0  h-screen w-full">
+      <div className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
         <div className="flex flex-col gap-2">
           <h2 className="font-bold">Create a username?</h2>
           <p className="text-sm">One gymrat added to the family</p>

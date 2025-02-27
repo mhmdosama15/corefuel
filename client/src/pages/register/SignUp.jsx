@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
-    <div className="flex flex-col gap-10 items-center justify-center h-screen w-full">
-      <div className="flex flex-col min-h-[32rem] min-w-[32rem] max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
-        <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
+      <div className="flex flex-col  lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
+        <div className="flex flex-col h-full gap-4">
           <h2>Almost there! Create your account</h2>
           <form className="flex flex-col gap-4">
             <div className="flex flex-col items-start gap-2">
@@ -25,7 +25,9 @@ const SignUp = () => {
                 id="password"
                 className="border w-full px-4 py-2 border-[#dadada] bg-white"
               />
-              <span>Password must be at least 10 characters</span>
+              <span className="pb-10 lg:pb-0">
+                Password must be at least 10 characters
+              </span>
             </div>
             <div className="">
               <Link

@@ -37,7 +37,7 @@ const Home = () => {
           <h2 className="text-xl">Welcome to</h2>
           <p className="text-xl">CoreFuel</p>
         </div>
-        <div className="grid grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
           {gridDetails.map((detail, index) => (
             <GridCard
               key={index}

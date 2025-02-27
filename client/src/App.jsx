@@ -20,9 +20,7 @@ function App() {
   const location = useLocation();
   return (
     <>
-      <div
-        className={`flex flex-col  2xl:mx-auto 2xl:container w-screen h-full `}
-      >
+      <div className={`flex flex-col   w-screen  h-full `}>
         <MaybeShowComponent>
           <Navbar />
         </MaybeShowComponent>
