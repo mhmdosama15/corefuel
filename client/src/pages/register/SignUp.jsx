@@ -38,6 +38,12 @@ const SignUp = () => {
               </Link>
             </div>
           </form>
+          <div className="flex mt-10 gap-2 items-center justify-center w-full">
+            <p> Already have an account?</p>
+            <Link to={"/login"} className="text-blue-500 hover:text-blue-700">
+              Log in
+            </Link>
+          </div>
         </div>
       </div>
     </div>

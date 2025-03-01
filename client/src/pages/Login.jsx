@@ -32,16 +32,16 @@ const Login = () => {
                 Log in
               </button>
             </div>
-            <div className="flex items-center justify-center w-full gap-2">
-              <span className="">Don't have an account?</span>
-              <Link
-                to={"/signup"}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                Sign up
-              </Link>
-            </div>
           </form>
+          <div className="flex items-center justify-center w-full gap-2">
+            <span className="">Don't have an account?</span>
+            <Link
+              to={"/starter/step-1"}
+              className="text-blue-500 hover:text-blue-700"
+            >
+              Sign up
+            </Link>
+          </div>
         </div>
       </div>
     </div>

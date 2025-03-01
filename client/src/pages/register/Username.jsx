@@ -16,7 +16,7 @@ const Username = () => {
         </div>
         <div className="flex items-center gap-6 mt-6">
           <Link
-            to={""}
+            to={"/signup"}
             className="border border-[#dadada] bg-white text-black px-4 py-2"
           >
             Back

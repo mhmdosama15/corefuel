@@ -31,7 +31,7 @@ const Home = () => {
             Login
           </Link>
           <Link
-            to={"/starter"}
+            to={"/starter/step-1"}
             className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
           >
             Signup
@@ -54,7 +54,7 @@ const Home = () => {
         </div>
         <div className="pb-20">
           <Link
-            to={"/starter"}
+            to={"/starter/step-1"}
             className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
           >
             Continue

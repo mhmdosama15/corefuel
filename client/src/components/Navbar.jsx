@@ -17,6 +17,9 @@ const Navbar = () => {
     "/food",
     "/settings",
     "/form-check",
+    "/body-anatomy",
+    "/anatomy/chest",
+    "/anatomy",
   ];
   useEffect(() => {
     // handle background scrolling when burger menu is open
@@ -44,6 +47,14 @@ const Navbar = () => {
             <Link to={"/"} className="text-2xl">
               CoreFuel
             </Link>
+            <div className="lg:hidden flex">
+              <button
+                onClick={openBurgerMenu}
+                className="text-2xl border bg-white p-2 rounded-lg border-[#dadada]"
+              >
+                {isBurgerMenu ? <IoCloseSharp /> : <CiMenuBurger />}
+              </button>
+            </div>
             {isLoggedIn && (
               <>
                 <div className="hidden lg:flex items-center gap-3 text-sm">
@@ -66,14 +77,6 @@ const Navbar = () => {
                       <FaFacebookSquare className="text-xl text-blue-500" />
                     </Link>
                   </div>
-                </div>
-                <div className="lg:hidden flex">
-                  <button
-                    onClick={openBurgerMenu}
-                    className="text-2xl border bg-white p-2 rounded-lg border-[#dadada]"
-                  >
-                    {isBurgerMenu ? <IoCloseSharp /> : <CiMenuBurger />}
-                  </button>
                 </div>
               </>
             )}
@@ -120,7 +123,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
-                  to={"/form-check"}
+                  to={"/body-anatomy"}
                 >
                   BODY ANATOMY
                 </Link>
