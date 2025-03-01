@@ -29,7 +29,6 @@ const StepStruggle = () => {
           <button
             key={index}
             onClick={() => addStruggle(struggle)}
-            disabled={selectedStruggles.length >= 4}
             className={`flex items-center justify-center py-2 px-4 rounded-lg text-center transition duration-300 ${
               selectedStruggles.includes(struggle)
                 ? "bg-blue-500 text-white"

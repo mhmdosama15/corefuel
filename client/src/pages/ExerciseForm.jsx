@@ -2,9 +2,9 @@ import React from "react";
 
 const ExerciseForm = () => {
   return (
-    <div className="flex flex-col px-30 pb-30 gap-6 pt-24">
+    <div className="flex flex-col px-6 lg:px-30 pb-10 lg:pb-30 gap-6  pt-10 lg:pt-24">
       <h2>Create New Exercise</h2>
-      <form className="flex justify-between w-3/4 gap-10  p-6 bg-white shadow-sm border border-[#dadada] rounded">
+      <form className="flex flex-col lg:flex-row lg:justify-between xl:w-3/4 gap-10  p-6 bg-white shadow-sm border border-[#dadada] rounded">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-3">
             <label htmlFor="exercise-name" className="text-lg font-bold">
@@ -60,7 +60,7 @@ const ExerciseForm = () => {
             Add
           </button>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex order-first lg:order-none flex-col gap-2">
           {" "}
           <h2 className="font-bold">Creating a new exercise</h2>
           <p>

@@ -2,10 +2,10 @@ import React from "react";
 
 const Calorie = () => {
   return (
-    <div className="flex flex-col px-30 pb-30 gap-6 pt-20">
+    <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30 gap-6 pt-10 lg:pt-20">
       <div className="flex flex-col gap-8 items-center bg-[#efefef] p-4  rounded">
         <h2 className="text-xl font-bold">Calorie Calculator</h2>
-        <form className="flex flex-col gap-6 p-6 w-2/4">
+        <form className="flex flex-col gap-6 p-6 w-full lg:w-2/4">
           <div className="flex flex-col gap-1">
             <label htmlFor="duration-cardio">
               Duration of Cardiovascular activity

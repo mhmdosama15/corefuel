@@ -22,17 +22,23 @@ const Home = () => {
   ];
   return (
     <>
-      <nav className="fixed top-0 pt-4 right-18 ">
-        <div className="flex items-end gap-2">
-          <Link to={"/login"} className="text-blue-700 hover:text-blue-600">
+      <nav className="fixed top-0 pt-4 flex items-center justify-end backdrop-blur-lg pb-2 w-full  lg:right-18 ">
+        <div className="flex items-end gap-2 pr-4 ">
+          <Link
+            to={"/login"}
+            className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
+          >
             Login
           </Link>
-          <Link to={"/starter"} className="text-blue-700 hover:text-blue-600">
+          <Link
+            to={"/starter"}
+            className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
+          >
             Signup
           </Link>
         </div>
       </nav>
-      <div className="flex flex-col gap-10 items-center justify-center h-full  w-full">
+      <div className="flex flex-col gap-10 items-center justify-center h-full pt-24  w-full">
         <div className="text-center">
           <h2 className="text-xl">Welcome to</h2>
           <p className="text-xl">CoreFuel</p>
@@ -46,10 +52,10 @@ const Home = () => {
             />
           ))}
         </div>
-        <div className="">
+        <div className="pb-20">
           <Link
             to={"/starter"}
-            className="bg-[#dadada] rounded px-4 py-2 w-96 mt-6"
+            className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
           >
             Continue
           </Link>

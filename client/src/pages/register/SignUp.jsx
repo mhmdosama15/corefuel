@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SignUp = () => {
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
-      <div className="flex flex-col  lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
+      <div className="flex flex-col  lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
         <div className="flex flex-col h-full gap-4">
           <h2>Almost there! Create your account</h2>
           <form className="flex flex-col gap-4">
@@ -32,7 +32,7 @@ const SignUp = () => {
             <div className="">
               <Link
                 to={"/signup/username"}
-                className="bg-white px-4 py-2 w-full mt-6"
+                className="bg-blue-500 hover:bg-blue-700 text-white rounded-md py-2 px-4"
               >
                 Continue
               </Link>

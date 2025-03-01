@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
+import BurgerMenu from "./BurgerMenu";
+import { IoCloseSharp } from "react-icons/io5";
 const Navbar = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isBurgerMenu, setIsBurgerMenu] = useState(false);
   const paths = [
     "/dashboard",
     "/exercise",
@@ -13,7 +16,20 @@ const Navbar = () => {
     "/exercise/create",
     "/food",
     "/settings",
+    "/form-check",
   ];
+  useEffect(() => {
+    // handle background scrolling when burger menu is open
+    if (isBurgerMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isBurgerMenu]);
+  const openBurgerMenu = () => {
+    setIsBurgerMenu(!isBurgerMenu);
+  };
+  const closeMenu = () => setIsBurgerMenu(false);
   return (
     <>
       <nav
@@ -52,42 +68,61 @@ const Navbar = () => {
                   </div>
                 </div>
                 <div className="lg:hidden flex">
-                  <button className="text-2xl border bg-white p-2 rounded-lg border-[#dadada]">
-                    <CiMenuBurger />
+                  <button
+                    onClick={openBurgerMenu}
+                    className="text-2xl border bg-white p-2 rounded-lg border-[#dadada]"
+                  >
+                    {isBurgerMenu ? <IoCloseSharp /> : <CiMenuBurger />}
                   </button>
                 </div>
               </>
+            )}
+            {isBurgerMenu && (
+              <BurgerMenu closeMenu={closeMenu} isLoggedIn={isLoggedIn} />
             )}
           </div>
           {isLoggedIn && (
             <div className="hidden lg:flex px-30  border border-transparent bg-blue-500   w-full">
               <div className="flex items-center  text-white ">
                 <Link
-                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
                   to={"/dashboard"}
                 >
                   My HOME
                 </Link>
 
                 <Link
-                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
                   to={"/exercise"}
                 >
                   EXERCISE
                 </Link>
 
                 <Link
-                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
                   to={"/calories"}
                 >
                   CALORIE
                 </Link>
 
                 <Link
-                  className="hover:bg-white hover:text-blue-500 py-3 px-6"
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
                   to={"/nutrition"}
                 >
                   NUTRITION
+                </Link>
+
+                <Link
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  to={"/form-check"}
+                >
+                  FORM CHECK
+                </Link>
+                <Link
+                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  to={"/form-check"}
+                >
+                  BODY ANATOMY
                 </Link>
               </div>
             </div>

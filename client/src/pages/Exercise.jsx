@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Exercise = () => {
   const today = new Date().toISOString().slice(0, 10);
   return (
-    <div className="flex flex-col px-30 pb-30 gap-6 pt-24">
-      <div className="flex items-center border-b border-b-[#dadada] pb-10 gap-20">
+    <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-24">
+      <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center border-b border-b-[#dadada] pb-10 lg:gap-20">
         <p>Your exercise dairy for: </p>
         <div>{today}</div>
         <div className="flex flex-col text-sm">
@@ -13,7 +13,7 @@ const Exercise = () => {
           <input type="date" id="date" className="border px-4 py-2" />
         </div>
       </div>
-      <div className="flex items-start border-b border-b-[#dadada] pb-10 gap-44">
+      <div className="flex flex-col lg:flex-row items-start border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Cardiovascular</p>
           <Link
@@ -34,7 +34,7 @@ const Exercise = () => {
           <p className="border px-4 py-1 rounded">100</p>
         </div>
       </div>
-      <div className="flex items-start border-b border-b-[#dadada] pb-10 gap-44">
+      <div className="flex flex-col lg:flex-row items-start border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Strength Training</p>
           <Link

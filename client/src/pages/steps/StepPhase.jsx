@@ -6,14 +6,8 @@ const StepPhase = () => {
     "Shredding : losing a good amount of fat ",
     "Body Compostion: Gaining muscles with the fewest amount of fat gained   ",
   ];
-  const [selectedPhase, setSelectedPhase] = useState([]);
-  const addPhase = (phase) => {
-    if (selectedPhase.includes(phase)) {
-      setSelectedPhase(selectedPhase.filter((ph) => ph !== phase));
-    } else {
-      setSelectedPhase([...selectedPhase, phase]);
-    }
-  };
+  const [selectedPhase, setSelectedPhase] = useState("");
+
   return (
     <div className="flex flex-col text-center gap-3">
       <h2 className="font-bold">
@@ -27,10 +21,9 @@ const StepPhase = () => {
         {phases.map((phase, index) => (
           <button
             key={index}
-            onClick={() => addPhase(phase)}
-            disabled={selectedPhase.length >= 4}
+            onClick={() => setSelectedPhase(phase)}
             className={`flex items-center justify-center py-2 px-4 rounded-lg text-center transition duration-300 ${
-              selectedPhase.includes(phase)
+              selectedPhase === phase
                 ? "bg-blue-500 text-white"
                 : "bg-white text-black border border-gray-300"
             }`}

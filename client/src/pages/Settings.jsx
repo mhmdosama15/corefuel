@@ -31,7 +31,7 @@ const Settings = () => {
     setShowMetrics(!showMetrics);
   };
   return (
-    <div className="flex flex-col px-30 pb-30 gap-6 pt-24">
+    <div className="flex flex-col px-6 pt-10 lg:px-30 lg:pb-30 gap-6 lg:pt-24">
       <h2 className="text-xl font-bold">Settings</h2>
       <div className="flex flex-col gap-3 items-start bg-white border border-[#dadada] rounded-lg p-4  ">
         <div className="flex items-center gap-1">
@@ -52,7 +52,7 @@ const Settings = () => {
               <label htmlFor="gender">Gender</label>
               <select
                 id="gender"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
               >
                 <option selected>Male</option>
                 <option>Female</option>
@@ -63,7 +63,7 @@ const Settings = () => {
               <input
                 id="age"
                 placeholder="Age"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
@@ -74,7 +74,7 @@ const Settings = () => {
               <input
                 id="weight"
                 placeholder="weight"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
@@ -86,7 +86,7 @@ const Settings = () => {
               <input
                 id="height"
                 placeholder="height"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
                 type="number"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
@@ -96,7 +96,7 @@ const Settings = () => {
               <label htmlFor="activity-level">Activity Level</label>
               <select
                 id="activity-level"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
               >
                 <option selected>Active</option>
                 <option>Not Active</option>
@@ -106,7 +106,7 @@ const Settings = () => {
               <label htmlFor="goal">Goal</label>
               <select
                 id="goal"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
               >
                 <option selected>Weight Loss</option>
                 <option>Weight Gain</option>
@@ -127,7 +127,7 @@ const Settings = () => {
           <div className="flex gap-2 items-center">
             <input
               placeholder="Name"
-              className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+              className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -147,7 +147,7 @@ const Settings = () => {
           <div className="flex gap-2 items-center">
             <input
               placeholder="Email"
-              className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+              className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -168,7 +168,7 @@ const Settings = () => {
             <div className="flex gap-2 items-center">
               <input
                 placeholder="password"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -177,7 +177,7 @@ const Settings = () => {
             <div className="flex gap-2 items-center">
               <input
                 placeholder="confirm-password"
-                className="border w-96 px-4 py-2 rounded-md border-[#dadada]"
+                className="border lg:w-96 w-full px-4 py-2 rounded-md border-[#dadada]"
                 type="confirm-password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
