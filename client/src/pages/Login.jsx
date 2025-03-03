@@ -1,13 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/authSlice";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post("/api/auth/login", { email, password });
+      if (response.status === 200) {
+        dispatch(setUser(response.data.user));
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
       <div className="flex flex-col lg:min-h-[32rem] w-full lg:min-w-[32rem]  lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
         <div className="flex flex-col gap-4">
           <h2>Log into your account</h2>
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col items-start gap-2">
               <label htmlFor="email">Email</label>
               <input
@@ -15,6 +38,8 @@ const Login = () => {
                 name="email"
                 id="email"
                 className="border w-full lg:w-96 px-4 py-2 border-[#dadada] bg-white"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -24,11 +49,17 @@ const Login = () => {
                 name="password"
                 id="password"
                 className="border w-full lg:w-96 px-4 py-2 border-[#dadada] bg-white"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <span></span>
             </div>
             <div className="mt-6 lg:mt-10">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white rounded-md py-2 px-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-blue-500 hover:bg-blue-700 text-white rounded-md py-2 px-4"
+              >
                 Log in
               </button>
             </div>

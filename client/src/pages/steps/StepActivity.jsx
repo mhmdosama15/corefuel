@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StepActivity = () => {
   const levels = [
@@ -7,7 +7,19 @@ const StepActivity = () => {
     "Active ",
     "Very Active ",
   ];
-  const [selectedActivity, setSelectedActivity] = useState("");
+  const [selectedActivity, setSelectedActivity] = useState(
+    sessionStorage.getItem("activity") || ""
+  );
+  const saveActivity = (level) => {
+    setSelectedActivity(level);
+    sessionStorage.setItem("activity", selectedActivity);
+  };
+  useEffect(() => {
+    const activity = sessionStorage.getItem("activity");
+    if (activity) {
+      setSelectedActivity(activity);
+    }
+  }, []);
   return (
     <div className="flex flex-col text-center gap-3">
       <h2 className="font-bold">What is your baseline activity level?</h2>
@@ -16,7 +28,7 @@ const StepActivity = () => {
         {levels.map((level, index) => (
           <button
             key={index}
-            onClick={() => setSelectedActivity(level)}
+            onClick={() => saveActivity(level)}
             className={`flex items-center justify-center py-2 px-4 rounded-lg text-center transition duration-300 ${
               selectedActivity === level
                 ? "bg-blue-500 text-white"
