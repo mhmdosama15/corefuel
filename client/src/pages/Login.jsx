@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/authSlice";
+import { setAuth, setUser } from "../redux/authSlice";
+import { BACKEND_URL } from "../utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,13 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/api/auth/login", { email, password });
+      const response = await axios.post(`${BACKEND_URL}/api/auth/login`, {
+        email,
+        password,
+      });
       if (response.status === 200) {
         dispatch(setUser(response.data.user));
+        dispatch(response.data.token ? setAuth(true) : setAuth(false));
         navigate("/dashboard");
       }
     } catch (error) {
@@ -27,7 +32,7 @@ const Login = () => {
   };
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
-      <div className="flex flex-col lg:min-h-[32rem] w-full lg:min-w-[32rem]  lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
+      <div className="flex flex-col lg:min-h-[32rem]  lg:min-w-[32rem]  lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
         <div className="flex flex-col gap-4">
           <h2>Log into your account</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">

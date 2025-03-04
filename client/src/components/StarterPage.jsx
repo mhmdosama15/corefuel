@@ -27,7 +27,11 @@ const StarterPage = () => {
 
         <div className="flex items-center gap-6 mt-6">
           <Link
-            to={`/starter/step-${Math.max(1, stepNumber - 1)}`}
+            to={
+              stepNumber === 1
+                ? `/`
+                : `/starter/step-${Math.max(1, stepNumber - 1)}`
+            }
             className="border border-[#dadada] bg-white text-black px-4 py-2"
           >
             Back

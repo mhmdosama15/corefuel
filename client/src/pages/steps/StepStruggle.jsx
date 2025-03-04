@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StepStruggle = () => {
   const struggles = [
@@ -7,21 +7,37 @@ const StepStruggle = () => {
     "Balancing my diet",
     "Social events/Vacations",
     "Healthy Food is expensive",
-    "Loack of healthy food variety",
+    "Lack of healthy food variety",
     "Lack of progress",
   ];
-  const [selectedStruggles, setSelectedStruggles] = useState([]);
+
+  const [selectedStruggles, setSelectedStruggles] = useState(() => {
+    const storedStruggles = sessionStorage.getItem("struggles");
+    return storedStruggles ? JSON.parse(storedStruggles) : [];
+  });
+
   const addStruggle = (struggle) => {
+    let updatedStruggles;
     if (selectedStruggles.includes(struggle)) {
-      setSelectedStruggles(selectedStruggles.filter((s) => s !== struggle));
+      updatedStruggles = selectedStruggles.filter((s) => s !== struggle);
     } else {
-      setSelectedStruggles([...selectedStruggles, struggle]);
+      updatedStruggles = [...selectedStruggles, struggle];
     }
+    setSelectedStruggles(updatedStruggles);
+    sessionStorage.setItem("struggles", JSON.stringify(updatedStruggles));
   };
+
+  useEffect(() => {
+    const storedStruggles = sessionStorage.getItem("struggles");
+    if (storedStruggles) {
+      setSelectedStruggles(JSON.parse(storedStruggles));
+    }
+  }, []);
+
   return (
     <div className="flex flex-col text-center gap-3">
       <h2 className="font-bold">
-        Previously what have you been struggling the most with?
+        Previously, what have you been struggling the most with?
       </h2>
       <p>Select all that apply</p>
       <div className="grid gap-2">

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StepPhase = () => {
   const phases = [
-    "Lean Bulk : Gaining muscle with a bit of fat ",
-    "Shredding : losing a good amount of fat ",
-    "Body Compostion: Gaining muscles with the fewest amount of fat gained   ",
+    "Lean Bulk: Gaining muscle with a bit of fat",
+    "Shredding: Losing a good amount of fat",
+    "Body Composition: Gaining muscles with the fewest amount of fat gained",
   ];
-  const [selectedPhase, setSelectedPhase] = useState("");
+
+  const [selectedPhase, setSelectedPhase] = useState(() => {
+    return sessionStorage.getItem("phase") || "";
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("phase", selectedPhase);
+  }, [selectedPhase]);
 
   return (
     <div className="flex flex-col text-center gap-3">
@@ -15,7 +22,7 @@ const StepPhase = () => {
       </h2>
       <p>
         Choose the type of split that matches your level of intensity and time
-        available
+        available.
       </p>
       <div className="grid gap-2">
         {phases.map((phase, index) => (

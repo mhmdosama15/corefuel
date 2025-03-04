@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const StepProfile = () => {
+  const [gender, setGender] = useState(sessionStorage.getItem("gender") || "");
+  const [dob, setDob] = useState(sessionStorage.getItem("dob") || "");
+  const [location, setLocation] = useState(
+    sessionStorage.getItem("location") || ""
+  );
+
+  useEffect(() => {
+    sessionStorage.setItem("gender", gender);
+  }, [gender]);
+
+  useEffect(() => {
+    sessionStorage.setItem("dob", dob);
+  }, [dob]);
+
+  useEffect(() => {
+    sessionStorage.setItem("location", location);
+  }, [location]);
+
   return (
     <div className="flex flex-col text-center items-center gap-3">
       <h2 className="font-bold">
@@ -12,18 +30,33 @@ const StepProfile = () => {
         <p className="font-bold">Gender:</p>
         <div className="flex items-center gap-10">
           <div className="flex items-center">
-            <input type="radio" name="gender" id="male" />
+            <input
+              type="radio"
+              name="gender"
+              id="male"
+              value="male"
+              checked={gender === "male"}
+              onChange={(e) => setGender(e.target.value)}
+            />
             <label className="ml-2" htmlFor="male">
               Male
             </label>
           </div>
-          <div className="flex items-center ">
-            <input type="radio" name="gender" id="female" />
+          <div className="flex items-center">
+            <input
+              type="radio"
+              name="gender"
+              id="female"
+              value="female"
+              checked={gender === "female"}
+              onChange={(e) => setGender(e.target.value)}
+            />
             <label className="ml-2" htmlFor="female">
               Female
             </label>
           </div>
         </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="dob" className="font-bold">
             Date of birth
@@ -32,9 +65,12 @@ const StepProfile = () => {
             type="date"
             id="dob"
             name="dob"
-            className="border bg-white p-2 "
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            className="border bg-white p-2"
           />
         </div>
+
         <div className="flex flex-col gap-2">
           <label htmlFor="location" className="font-bold">
             Where do you live?
@@ -43,11 +79,15 @@ const StepProfile = () => {
             type="text"
             id="location"
             name="location"
-            className="border bg-white p-2 "
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="border bg-white p-2"
           />
         </div>
+
         <p className="text-sm">
-          This information is used to calculate accurate calorie goal for you.
+          This information is used to calculate an accurate calorie goal for
+          you.
         </p>
       </div>
     </div>

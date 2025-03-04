@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const StepGoals = () => {
   const goals = [
@@ -10,24 +10,36 @@ const StepGoals = () => {
     "Fit Body",
     "Shred",
   ];
-  const [selectedGoals, setSelectedGoals] = useState([]);
+
+  const [selectedGoals, setSelectedGoals] = useState(() => {
+    const storedGoals = sessionStorage.getItem("goals");
+    return storedGoals ? JSON.parse(storedGoals) : [];
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("goals", JSON.stringify(selectedGoals));
+  }, [selectedGoals]);
+
   const addGoal = (goal) => {
-    if (selectedGoals.includes(goal)) {
-      setSelectedGoals(selectedGoals.filter((g) => g !== goal));
-    } else {
-      setSelectedGoals([...selectedGoals, goal]);
-    }
+    setSelectedGoals((prev) => {
+      if (prev.includes(goal)) {
+        return prev.filter((g) => g !== goal);
+      } else if (prev.length < 4) {
+        return [...prev, goal];
+      }
+      return prev;
+    });
   };
+
   return (
     <div className="flex flex-col text-center gap-3">
       <h2 className="font-bold">What are your main goals?</h2>
-      <p>Select up to 4 that matches your plans</p>
+      <p>Select up to 4 that match your plans</p>
       <div className="grid gap-2">
         {goals.map((goal, index) => (
           <button
             key={index}
             onClick={() => addGoal(goal)}
-            disabled={selectedGoals.length >= 4}
             className={`flex items-center justify-center py-2 px-4 rounded-lg text-center transition duration-300 ${
               selectedGoals.includes(goal)
                 ? "bg-blue-500 text-white"

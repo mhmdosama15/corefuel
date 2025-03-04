@@ -1,8 +1,8 @@
-import User from "../model/user";
+import User from "../model/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import Metrics from "../model/metrics";
-export const createUser = async () => {
+import Metrics from "../model/metrics.js";
+export const createUser = async (req, res) => {
   try {
     const { firstName, username, email, password, metricsData } = req.body;
     const user = await User.findOne({ email });
@@ -25,6 +25,14 @@ export const createUser = async () => {
     await newMetrics.save();
     newUser.metrics = newMetrics._id;
     await newUser.save();
+    const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY, {
+      expiresIn: "10d",
+    });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      //   sameSite: "none",
+    });
     return res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error(error);
@@ -32,7 +40,24 @@ export const createUser = async () => {
   }
 };
 
-export const loginUser = async () => {
+export const addUsername = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { username } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.username = username;
+    await user.save();
+    return res.status(200).json({ message: "Username added successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error adding username" });
+  }
+};
+
+export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -48,12 +73,29 @@ export const loginUser = async () => {
     });
     res.cookie("token", token, {
       httpOnly: true,
-      // secure: true,
-      sameSite: "none",
+      secure: true,
+      //   sameSite: "none",
     });
     return res.status(200).json({ message: "Login successful", token, user });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error logging in" });
+  }
+};
+
+// auth
+export const authenticateUser = async (req, res, next) => {
+  try {
+    const token = req.cookies.token;
+    console.log("token", token);
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const verifiedToken = jwt.verify(token, process.env.SECRET_KEY);
+    req.userId = verifiedToken.userId;
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error authenticating user" });
   }
 };

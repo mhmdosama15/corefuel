@@ -1,19 +1,110 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../utils";
 
 const SignUp = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const firstName = sessionStorage.getItem("firstName");
+    const goals = JSON.parse(sessionStorage.getItem("goals"));
+    const struggles = JSON.parse(sessionStorage.getItem("struggles"));
+    const height = sessionStorage.getItem("height");
+    const weight = sessionStorage.getItem("weight");
+    const goalWeight = sessionStorage.getItem("goalWeight");
+    const phase = sessionStorage.getItem("phase");
+    const activityLevel = sessionStorage.getItem("activity");
+    const location = sessionStorage.getItem("location");
+    const gender = sessionStorage.getItem("gender");
+    const dob = sessionStorage.getItem("dob");
+    const splitType = sessionStorage.getItem("split");
+    console.log(
+      "data",
+      firstName,
+      email,
+      password,
+      goals,
+      struggles,
+      height,
+      weight,
+      goalWeight,
+      phase,
+      activityLevel,
+      location,
+
+      gender,
+      dob,
+      splitType
+    );
+    if (
+      !firstName ||
+      !email ||
+      !password ||
+      !goals ||
+      !struggles ||
+      !height ||
+      !weight ||
+      !goalWeight ||
+      !phase ||
+      !activityLevel ||
+      !location ||
+      !gender ||
+      !dob ||
+      !splitType
+    ) {
+      alert("Please complete all fields");
+      return;
+    }
+
+    const userData = {
+      firstName,
+      email,
+      password,
+      metricsData: {
+        goals,
+        struggles,
+        height,
+        weight,
+        goalWeight,
+        phase,
+        activityLevel,
+        location,
+        gender,
+        dob,
+        splitType,
+      },
+    };
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/auth/register`,
+        userData
+      );
+      console.log(response.data);
+      if (response.status === 201) {
+        sessionStorage.clear();
+        navigate("/signup/username");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
-      <div className="flex flex-col  lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
+      <div className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
         <div className="flex flex-col h-full gap-4">
           <h2>Almost there! Create your account</h2>
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col items-start gap-2">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
                 name="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="border w-full px-4 py-2 border-[#dadada] bg-white"
               />
             </div>
@@ -23,6 +114,8 @@ const SignUp = () => {
                 type="password"
                 name="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="border w-full px-4 py-2 border-[#dadada] bg-white"
               />
               <span className="pb-10 lg:pb-0">
@@ -30,12 +123,12 @@ const SignUp = () => {
               </span>
             </div>
             <div className="">
-              <Link
-                to={"/signup/username"}
+              <button
+                type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white rounded-md py-2 px-4"
               >
                 Continue
-              </Link>
+              </button>
             </div>
           </form>
           <div className="flex mt-10 gap-2 items-center justify-center w-full">
