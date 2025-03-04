@@ -26,14 +26,17 @@ export const createUser = async (req, res) => {
     newUser.metrics = newMetrics._id;
     await newUser.save();
     const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY, {
-      expiresIn: "10d",
+      expiresIn: "5d",
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      //   sameSite: "none",
+      // secure: true,
+      sameSite: "none",
     });
-    return res.status(201).json({ message: "User created successfully" });
+    console.log("token", token);
+    return res
+      .status(201)
+      .json({ message: "User created successfully", token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error creating user" });
@@ -69,12 +72,12 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "10d",
+      expiresIn: "5d",
     });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      //   sameSite: "none",
+      // secure: true,
+      sameSite: "none",
     });
     return res.status(200).json({ message: "Login successful", token, user });
   } catch (error) {
@@ -84,10 +87,10 @@ export const loginUser = async (req, res) => {
 };
 
 // auth
-export const authenticateUser = async (req, res, next) => {
+export const verifyUser = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
-    console.log("token", token);
+    const token = req.headers.authorization?.split(" ")[1] || req.cookies.token;
+    console.log("token auth", token);
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
     }

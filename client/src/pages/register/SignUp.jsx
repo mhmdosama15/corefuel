@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../utils";
+import { useDispatch } from "react-redux";
+import { setAuth, setToken } from "../../redux/authSlice";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const firstName = sessionStorage.getItem("firstName");
@@ -34,7 +37,6 @@ const SignUp = () => {
       phase,
       activityLevel,
       location,
-
       gender,
       dob,
       splitType
@@ -85,6 +87,9 @@ const SignUp = () => {
       console.log(response.data);
       if (response.status === 201) {
         sessionStorage.clear();
+        localStorage.setItem("auth_token", response.data.token);
+        dispatch(setToken(response.data.token));
+        dispatch(response.data.token ? setAuth(true) : setAuth(false));
         navigate("/signup/username");
       }
     } catch (error) {

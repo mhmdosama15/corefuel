@@ -8,15 +8,16 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
-
+app.use(cookieParser());
+app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:5173",
     credentials: true,
+    methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(express.json());
-app.use(cookieParser());
 
 connectDB();
 app.use("/api/auth", authRoutes);

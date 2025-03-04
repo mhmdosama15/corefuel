@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../utils";
+import { useSelector } from "react-redux";
 
 const Username = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -14,7 +16,11 @@ const Username = () => {
         {
           username,
         },
-        { withCredentials: true }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(response.data);
       if (response.status === 200) {

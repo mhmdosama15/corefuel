@@ -6,8 +6,11 @@ const StepName = () => {
   );
   const handleChange = (e) => {
     setFirstName(e.target.value);
-    sessionStorage.setItem("firstName", firstName);
   };
+  useEffect(() => {
+    sessionStorage.setItem("firstName", firstName);
+  }, [firstName]);
+
   useEffect(() => {
     const storedFirstName = sessionStorage.getItem("firstName");
     if (storedFirstName) {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setAuth, setUser } from "../redux/authSlice";
+import { setAuth, setToken, setUser } from "../redux/authSlice";
 import { BACKEND_URL } from "../utils";
 
 const Login = () => {
@@ -20,8 +20,10 @@ const Login = () => {
         password,
       });
       if (response.status === 200) {
+        localStorage.setItem("auth_token", response.data.token);
         dispatch(setUser(response.data.user));
         dispatch(response.data.token ? setAuth(true) : setAuth(false));
+        dispatch(setToken(response.data.token));
         navigate("/dashboard");
       }
     } catch (error) {
