@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 const StepActivity = () => {
-  const levels = ["Not Very Active", "Lightly Active", "Active", "Very Active"];
-
+  const levels = ["not_very_active", "lightly_active", "active", "very_active"];
+  const mapText = {
+    not_very_active: "Not very active",
+    lightly_active: "Lightly active",
+    active: "Active",
+    very_active: "Very active",
+  };
   const [selectedActivity, setSelectedActivity] = useState(() => {
     return sessionStorage.getItem("activity") || "";
   });
@@ -26,7 +31,7 @@ const StepActivity = () => {
                 : "bg-white text-black border border-gray-300"
             }`}
           >
-            <span>{level}</span>
+            <span>{mapText[level]}</span>
           </button>
         ))}
       </div>

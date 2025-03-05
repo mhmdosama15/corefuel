@@ -9,7 +9,7 @@ const Dashboard = () => {
         <div className="flex items-center gap-4">
           {" "}
           <div className="flex uppercase rounded-full border h-16 w-16 bg-blue-500 text-center items-center text-white justify-center ">
-            {username.slice(0, 1)}
+            {username?.slice(0, 1)}
           </div>
           <h2>{username}</h2>
         </div>

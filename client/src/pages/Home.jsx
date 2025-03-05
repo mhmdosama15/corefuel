@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GridCard from "../components/GridCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PictureOne from "../assets/images/pic1.jpg";
 import PictureTwo from "../assets/images/pic2.jpg";
 import PictureThree from "../assets/images/pic3.jpg";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
   const gridDetails = [
     {
       title: "Fitness Quote",
@@ -20,6 +23,12 @@ const Home = () => {
       picture: PictureOne,
     },
   ];
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
   return (
     <>
       <nav className="fixed top-0 pt-4 flex items-center justify-end backdrop-blur-lg pb-2 w-full  lg:right-18 ">

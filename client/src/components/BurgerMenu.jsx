@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BurgerMenu = ({ closeMenu, isLoggedIn }) => {
+const BurgerMenu = ({ closeMenu, isLoggedIn, logout }) => {
+  const signout = () => {
+    logout();
+    closeMenu();
+  };
   return (
     <div className="fixed left-0 top-16 right-0 bottom-0 bg-white ">
       {isLoggedIn ? (
@@ -63,7 +67,10 @@ const BurgerMenu = ({ closeMenu, isLoggedIn }) => {
             </li>
           </ul>
           <div className="mb-10">
-            <button className="border text-lg px-4 py-1 rounded-lg border-[#dadada] bg-red-500  text-white ">
+            <button
+              onClick={signout}
+              className="border text-lg px-4 py-1 rounded-lg border-[#dadada] bg-red-500  text-white "
+            >
               Logout
             </button>
           </div>
@@ -71,10 +78,10 @@ const BurgerMenu = ({ closeMenu, isLoggedIn }) => {
       ) : (
         <div className="flex flex-col pt-4 px-4">
           <div className="flex flex-col gap-3">
-            <Link to={"/lpgin"} className="text-lg">
+            <Link onClick={closeMenu} to={"/login"} className="text-lg">
               Login
             </Link>
-            <Link to={"/signup"} className="text-lg">
+            <Link onClick={closeMenu} to={"/signup"} className="text-lg">
               Sign up
             </Link>
           </div>

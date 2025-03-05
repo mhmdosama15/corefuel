@@ -9,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
@@ -27,6 +28,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
+      setError("Invalid email or password");
     } finally {
       setLoading(false);
     }
@@ -38,6 +40,7 @@ const Login = () => {
         <div className="flex flex-col gap-4">
           <h2>Log into your account</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {error && <p className="text-red-500">{error}</p>}
             <div className="flex flex-col items-start gap-2">
               <label htmlFor="email">Email</label>
               <input

@@ -93,7 +93,11 @@ const Navbar = () => {
               </>
             )}
             {isBurgerMenu && (
-              <BurgerMenu closeMenu={closeMenu} isLoggedIn={isLoggedIn} />
+              <BurgerMenu
+                closeMenu={closeMenu}
+                isLoggedIn={isLoggedIn}
+                logout={logout}
+              />
             )}
           </div>
           {isLoggedIn && (

@@ -10,8 +10,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const firstName = sessionStorage.getItem("firstName");
     const goals = JSON.parse(sessionStorage.getItem("goals"));
     const struggles = JSON.parse(sessionStorage.getItem("struggles"));
@@ -94,6 +97,9 @@ const SignUp = () => {
       }
     } catch (error) {
       console.log("error", error);
+      setError(error.response.data.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -102,6 +108,7 @@ const SignUp = () => {
         <div className="flex flex-col h-full gap-4">
           <h2>Almost there! Create your account</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {error && <p className="text-red-500">{error}</p>}
             <div className="flex flex-col items-start gap-2">
               <label htmlFor="email">Email</label>
               <input
@@ -130,6 +137,7 @@ const SignUp = () => {
             <div className="">
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-blue-500 hover:bg-blue-700 text-white rounded-md py-2 px-4"
               >
                 Continue

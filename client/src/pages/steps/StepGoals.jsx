@@ -2,15 +2,23 @@ import React, { useEffect, useState } from "react";
 
 const StepGoals = () => {
   const goals = [
-    "Lose Weight",
-    "Maintain Weight",
-    "Gain Weight",
-    "Gain Muscle",
-    "Increase Step Count",
-    "Fit Body",
-    "Shred",
+    "lose_weight",
+    "maitain_weight",
+    "gain_weight",
+    "gain_muscle",
+    "increase_step_count",
+    "fit_body",
+    "shred",
   ];
-
+  const mapText = {
+    lose_weight: "Lose Weight",
+    maitain_weight: "Maintain Weight",
+    gain_weight: "Gain Weight",
+    gain_muscle: "Gain Muscle",
+    increase_step_count: "Increase Step Count",
+    fit_body: "Fit Body",
+    shred: "Shred",
+  };
   const [selectedGoals, setSelectedGoals] = useState(() => {
     const storedGoals = sessionStorage.getItem("goals");
     return storedGoals ? JSON.parse(storedGoals) : [];
@@ -46,7 +54,7 @@ const StepGoals = () => {
                 : "bg-white text-black border border-gray-300"
             }`}
           >
-            <span>{goal}</span>
+            <span>{mapText[goal]}</span>
           </button>
         ))}
       </div>
