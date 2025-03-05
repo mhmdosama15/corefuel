@@ -20,9 +20,8 @@ const Login = () => {
         password,
       });
       if (response.status === 200) {
-        localStorage.setItem("auth_token", response.data.token);
         dispatch(setUser(response.data.user));
-        dispatch(response.data.token ? setAuth(true) : setAuth(false));
+        dispatch(setAuth(true));
         dispatch(setToken(response.data.token));
         navigate("/dashboard");
       }
@@ -32,6 +31,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
       <div className="flex flex-col lg:min-h-[32rem]  lg:min-w-[32rem]  lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">

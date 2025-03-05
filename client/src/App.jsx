@@ -21,35 +21,36 @@ import Anatomy from "./pages/anatomy/Anatomy";
 import BodyAnatomy from "./pages/anatomy/BodyAnatomy";
 import ScrollToTop from "./components/ScrollToTop";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuth, setToken, setUser } from "./redux/authSlice";
 import axios from "axios";
 import { BACKEND_URL } from "./utils";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
-  const token = localStorage.getItem("auth_token");
+  const token = useSelector((state) => state.auth.token);
   const authenticateUser = async () => {
     if (!token) return;
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/auth/user-data`, {
-        headers: { Authorization: `Bearer ${token}` },
+      const response = await axios.get(`${BACKEND_URL}/api/auth`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response.status === 200) {
+        dispatch(setAuth(true));
         dispatch(setUser(response.data.user));
-        dispatch(response.data.token ? setAuth(true) : setAuth(false));
-        dispatch(setToken(response.data.token));
-        localStorage.setItem("auth_token", response.data.token);
       }
+      console.log(response.data);
     } catch (error) {
-      console.log("Authentication failed", error);
-      dispatch(setAuth(false));
-      dispatch(setToken(null));
+      console.log(error);
     }
   };
+
   useEffect(() => {
     authenticateUser();
-  }, [dispatch, token]);
+  }, []);
   return (
     <>
       <div className={`flex flex-col   w-screen  h-full `}>
@@ -58,22 +59,110 @@ function App() {
           <Navbar />
         </MaybeShowComponent>
         <Routes>
+          {/*  */}
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/exercise" element={<Exercise />} />
-          <Route path="/exercise/create" element={<ExerciseForm />} />
-          <Route path="/body-anatomy" element={<BodyAnatomy />} />
-          <Route path="/anatomy/chest" element={<AnatomyLayout />} />
-          <Route path="/anatomy" element={<Anatomy />} />
-          <Route path="/calories" element={<Calorie />} />
-          <Route path="/food" element={<Food />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/form-check" element={<FormCheck />} />
-          <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/starter/*" element={<StarterPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup/username" element={<Username />} />
+
+          {/* Protected Routes  */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exercise"
+            element={
+              <ProtectedRoute>
+                <Exercise />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/exercise/create"
+            element={
+              <ProtectedRoute>
+                <ExerciseForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/body-anatomy"
+            element={
+              <ProtectedRoute>
+                <BodyAnatomy />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/anatomy/chest"
+            element={
+              <ProtectedRoute>
+                <AnatomyLayout />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/anatomy"
+            element={
+              <ProtectedRoute>
+                <Anatomy />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/calories"
+            element={
+              <ProtectedRoute>
+                <Calorie />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/food"
+            element={
+              <ProtectedRoute>
+                <Food />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/form-check"
+            element={
+              <ProtectedRoute>
+                <FormCheck />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/nutrition"
+            element={
+              <ProtectedRoute>
+                <Nutrition />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/signup/username"
+            element={
+              <ProtectedRoute>
+                <Username />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </>

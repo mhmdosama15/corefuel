@@ -1,15 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
+  const username = useSelector((state) => state.auth.user.username);
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-20">
       <div className="grid lg:grid-cols-2  gap-10">
         <div className="flex items-center gap-4">
           {" "}
-          <div className="flex rounded-full border h-16 w-16 bg-blue-500 text-center items-center text-white justify-center uppercase">
-            OM
+          <div className="flex uppercase rounded-full border h-16 w-16 bg-blue-500 text-center items-center text-white justify-center ">
+            {username.slice(0, 1)}
           </div>
-          <h2>Osama</h2>
+          <h2>{username}</h2>
         </div>
 
         <p className="italic lg:w-96">

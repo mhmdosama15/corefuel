@@ -12,7 +12,7 @@ const Username = () => {
     e.preventDefault();
     try {
       const response = await axios.patch(
-        `${BACKEND_URL}/api/auth/update-username`,
+        `${BACKEND_URL}/api/auth/add-username`,
         {
           username,
         },

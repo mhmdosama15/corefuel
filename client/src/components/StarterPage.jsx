@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import StepName from "../pages/steps/StepName";
 import StepGoals from "../pages/steps/StepGoals";
 import StepStruggle from "../pages/steps/StepStruggle";
@@ -10,6 +10,7 @@ import StepProfile from "../pages/steps/StepProfile";
 import StepMetrics from "../pages/steps/StepMetrics";
 
 const StarterPage = () => {
+  const location = useLocation();
   const stepNumber = parseInt(location.pathname.split("-")[1]);
   return (
     <div className="flex flex-col gap-10 items-center justify-center h-screen border px-6 xl:px-0  w-full">

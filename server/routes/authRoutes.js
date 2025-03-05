@@ -10,9 +10,9 @@ import { getUserData } from "../controller/userController.js";
 const router = express.Router();
 
 router.post("/register", createUser);
-router.patch("/update-username", verifyUser, addUsername);
+router.patch("/add-username", verifyUser, addUsername);
 router.post("/login", loginUser);
 
 // user
-router.get("/user-data", getUserData);
+router.get("/", verifyUser, getUserData);
 export default router;

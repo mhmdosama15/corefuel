@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 import { CiMenuBurger } from "react-icons/ci";
 import BurgerMenu from "./BurgerMenu";
 import { IoCloseSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "../redux/authSlice";
 const Navbar = () => {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
+  console.log(isLoggedIn);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
   const paths = [
     "/dashboard",
@@ -21,6 +26,10 @@ const Navbar = () => {
     "/anatomy/chest",
     "/anatomy",
   ];
+  const logout = () => {
+    dispatch(clearUser());
+    navigate("/");
+  };
   useEffect(() => {
     // handle background scrolling when burger menu is open
     if (isBurgerMenu) {
@@ -65,9 +74,12 @@ const Navbar = () => {
                   >
                     Settings
                   </Link>
-                  <Link className="text-blue-500 hover:text-blue-700 font-bold">
+                  <button
+                    onClick={logout}
+                    className="text-blue-500 hover:text-blue-700 font-bold"
+                  >
                     Logout
-                  </Link>
+                  </button>
                   <div className="flex items-center gap-1">
                     <p>Follow Us:</p>
                     <Link>
