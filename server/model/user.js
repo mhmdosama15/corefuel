@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema(
       ref: "exercise",
       required: false,
     },
+    lastQuoteGeneratedAt: { type: Date, default: null },
   },
   { timestamps: true }
 );

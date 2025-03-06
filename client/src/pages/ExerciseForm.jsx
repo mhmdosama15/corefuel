@@ -1,10 +1,51 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../utils";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const ExerciseForm = () => {
+  const [exerciseName, setExerciseName] = useState("");
+  const [exerciseType, setExerciseType] = useState("cardio");
+  const [exerciseDuration, setExerciseDuration] = useState("");
+  const [caloriesBurned, setCaloriesBurned] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/user/add-exercise`,
+        {
+          exerciseName,
+          exerciseType,
+          exerciseDuration,
+          caloriesBurned,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        setExerciseName("");
+        setExerciseType("cardio");
+        setExerciseDuration("");
+        setCaloriesBurned("");
+        navigate("/exercise");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-10 lg:pb-30 gap-6  pt-10 lg:pt-24">
       <h2>Create New Exercise</h2>
-      <form className="flex flex-col lg:flex-row lg:justify-between xl:w-3/4 gap-10  p-6 bg-white shadow-sm border border-[#dadada] rounded">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col lg:flex-row lg:justify-between xl:w-3/4 gap-10  p-6 bg-white shadow-sm border border-[#dadada] rounded"
+      >
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-3">
             <label htmlFor="exercise-name" className="text-lg font-bold">
@@ -13,6 +54,10 @@ const ExerciseForm = () => {
             <input
               id="exercise-name"
               className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
+              type="text"
+              value={exerciseName}
+              onChange={(e) => setExerciseName(e.target.value)}
+              required
             />
           </div>
           <div className="flex flex-col gap-3">
@@ -22,9 +67,12 @@ const ExerciseForm = () => {
             <select
               id="exericse-type"
               className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
+              value={exerciseType}
+              onChange={(e) => setExerciseType(e.target.value)}
+              required
             >
-              <option>Cardio</option>
-              <option>Strength</option>
+              <option value={"cardio"}>Cardio</option>
+              <option value={"strength"}>Strength</option>
             </select>
           </div>
           <div className="flex flex-col gap-3">
@@ -36,6 +84,9 @@ const ExerciseForm = () => {
                 id="mins"
                 type="number"
                 className="bg-white border border-[#dadada] rounded  px-4 py-2"
+                value={exerciseDuration}
+                onChange={(e) => setExerciseDuration(e.target.value)}
+                required
               />
               <span>Minutes</span>
             </div>
@@ -49,12 +100,15 @@ const ExerciseForm = () => {
                 id="calories"
                 type="number"
                 className="bg-white border border-[#dadada] rounded  px-4 py-2"
+                value={caloriesBurned}
+                onChange={(e) => setCaloriesBurned(e.target.value)}
               />
               <span>kcal</span>
             </div>
           </div>
           <button
             type="submit"
+            disabled={loading}
             className="px-4 mt-6 py-2 rounded bg-blue-500 text-white w-32"
           >
             Add

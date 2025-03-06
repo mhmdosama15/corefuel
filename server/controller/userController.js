@@ -1,3 +1,5 @@
+import { generateMotivationalQuote } from "../api.js";
+import Exercise from "../model/exercise.js";
 import User from "../model/user.js";
 
 export const getUserData = async (req, res) => {
@@ -13,3 +15,114 @@ export const getUserData = async (req, res) => {
     return res.status(500).json({ message: "Error getting user data" });
   }
 };
+
+export const getMotivationalQuote = async (req, res) => {
+  const userId = req.userId;
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  const { goal, phase, activityLevel, struggle } = req.body;
+  const now = new Date();
+  const lastGenerated = user.lastQuoteGeneratedAt;
+  const hoursDiff = lastGenerated
+    ? (now - lastGenerated) / (1000 * 60 * 60)
+    : 25;
+  if (lastGenerated && hoursDiff < 24) {
+    return res
+      .status(429)
+      .json({ message: "Quote already generated in the last 24 hours" });
+  }
+  try {
+    const result = await generateMotivationalQuote(
+      goal,
+      phase,
+      struggle,
+      activityLevel
+    );
+    user.lastQuoteGeneratedAt = now;
+    await user.save();
+    return res
+      .status(200)
+      .json({ message: "Motivational quote generated successfully", result });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Error generating motivational quote" });
+  }
+};
+
+export const createExercise = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { exerciseName, exerciseType, exerciseDuration, caloriesBurned } =
+      req.body;
+
+    const exercise = new Exercise({
+      userId,
+      exerciseName,
+      exerciseType,
+      exerciseDuration,
+      caloriesBurned,
+    });
+
+    await exercise.save();
+    return res.status(200).json({ message: "Exercise added successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error adding exercise" });
+  }
+};
+export const getUserExercises = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const userExercises = await Exercise.find({ userId });
+
+    if (!userExercises) {
+      return res.status(404).json({ message: "User exercises not found" });
+    }
+    return res.status(200).json({ message: "Authenticated", userExercises });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error getting user data" });
+  }
+};
+export const deleteExercise = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { exerciseId } = req.body;
+    const exercise = await Exercise.findOneAndDelete({ _id: exerciseId });
+    if (!exercise) {
+      return res.status(404).json({ message: "Exercise not found" });
+    }
+    return res.status(200).json({ message: "Exercise deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error deleting exercise" });
+  }
+};
+
+// export const addExerciseNote = async (req, res) => {
+//   try {
+//     const userId = req.userId;
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//     const { exerciseNote } = req.body;
+
+//     return res.status(200).json({ message: "Note added successfully" });
+//   } catch (error) {
+//     console.log(error);
+//     return res.status(500).json({ message: "Error adding note" });
+//   }
+// };

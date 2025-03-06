@@ -1,8 +1,40 @@
-import React from "react";
-import { useSelector } from "react-redux";
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setMotivationalQuote } from "../redux/userSlice";
+import { BACKEND_URL } from "../utils";
 const Dashboard = () => {
   const username = useSelector((state) => state.auth.user.username);
+  const goal = useSelector((state) => state.auth.user?.metrics?.goals[0]);
+  const phase = useSelector((state) => state.auth.user?.metrics?.phase);
+  const activityLevel = useSelector(
+    (state) => state.auth.user.metrics.activityLevel
+  );
+  const struggle = useSelector(
+    (state) => state.auth.user?.metrics?.struggles[0]
+  );
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  const quote = useSelector((state) => state.user.motivationalQuote);
+  const getMotivationalQuote = async () => {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/user/motivational-quote`,
+        { goal, phase, activityLevel, struggle },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        dispatch(setMotivationalQuote(response.data.result));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMotivationalQuote();
+  }, []);
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-20">
       <div className="grid lg:grid-cols-2  gap-10">
@@ -14,10 +46,7 @@ const Dashboard = () => {
           <h2>{username}</h2>
         </div>
 
-        <p className="italic lg:w-96">
-          "Your body won’t go where your mind won’t push it. Stay focused, stay
-          strong, and keep grinding!"
-        </p>
+        <p className="italic  ">{quote}</p>
       </div>
       <div className="flex items-center justify-end">
         <h2>1st Day streak</h2>

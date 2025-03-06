@@ -10,6 +10,7 @@ const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const username = useSelector((state) => state.auth.user?.username);
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
   console.log(isLoggedIn);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
@@ -64,10 +65,10 @@ const Navbar = () => {
                 {isBurgerMenu ? <IoCloseSharp /> : <CiMenuBurger />}
               </button>
             </div>
-            {isLoggedIn && (
+            {isLoggedIn && location.pathname !== "/signup/username" && (
               <>
                 <div className="hidden lg:flex items-center gap-3 text-sm">
-                  <p>Hi, Osama</p>
+                  <p>Hi, {username}</p>
                   <Link
                     to={"/settings"}
                     className="text-blue-500 hover:text-blue-700 font-bold"
@@ -100,7 +101,7 @@ const Navbar = () => {
               />
             )}
           </div>
-          {isLoggedIn && (
+          {isLoggedIn && location.pathname !== "/signup/username" && (
             <div className="hidden lg:flex px-30  border border-transparent bg-blue-500   w-full">
               <div className="flex items-center  text-white ">
                 <Link
