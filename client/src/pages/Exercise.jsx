@@ -98,7 +98,7 @@ const Exercise = () => {
                 {/* <td className="border px-4 py-2">
                   {new Date(exercise.createdAt).toLocaleDateString()}
                 </td> */}
-                <td className="border flex items-center justify-center gap-2 py-4">
+                <td className="border flex items-center justify-center gap-2 py-2">
                   <Link to={`/exercise/${exercise._id}`}>
                     <FaEdit className="text-xl" />
                   </Link>

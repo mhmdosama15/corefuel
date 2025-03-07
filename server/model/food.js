@@ -15,6 +15,10 @@ const foodSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    foodCategory: {
+      type: [String],
+      required: true,
+    },
     foodMacros: {
       calories: { type: Number, required: true },
       carbs: { type: Number, required: true },

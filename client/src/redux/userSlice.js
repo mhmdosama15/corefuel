@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { motivationalQuote: null, note: null };
+const initialState = { motivationalQuote: null, note: null, foodData: null };
 
 const userSlice = createSlice({
   name: "user",
@@ -12,8 +12,12 @@ const userSlice = createSlice({
     setNoteState: (state, action) => {
       state.note = action.payload;
     },
+    setUserFoodData: (state, action) => {
+      state.foodData = action.payload;
+    },
   },
 });
 
-export const { setMotivationalQuote, setNoteState } = userSlice.actions;
+export const { setMotivationalQuote, setNoteState, setUserFoodData } =
+  userSlice.actions;
 export default userSlice.reducer;
