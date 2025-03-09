@@ -25,7 +25,10 @@ const Navbar = () => {
     "/form-check",
     "/body-anatomy",
     "/anatomy/chest",
-    "/anatomy",
+    "/anatomy/back",
+    "/anatomy/shoulders",
+    "/anatomy/legs",
+    "",
   ];
   const logout = () => {
     dispatch(clearUser());

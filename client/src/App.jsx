@@ -99,7 +99,7 @@ function App() {
             }
           />
           <Route
-            path="/anatomy/chest"
+            path="/anatomy/:category"
             element={
               <ProtectedRoute>
                 <AnatomyLayout />

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo, Mongoose } from "mongoose";
 
 const anatomySchema = new mongoose.Schema(
   {
@@ -13,7 +13,16 @@ const anatomySchema = new mongoose.Schema(
     anatomyGroups: [
       {
         groupName: { type: String, required: true },
-        exercises: [{ exerciseName: { type: String, required: true } }],
+        exercises: [
+          {
+            exerciseName: { type: String, required: true },
+            exerciseVideo: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "video",
+              required: true,
+            },
+          },
+        ],
       },
     ],
   },

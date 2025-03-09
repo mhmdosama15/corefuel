@@ -2,6 +2,7 @@ import { generateMotivationalQuote, getFoodInfo } from "../api.js";
 import Exercise from "../model/exercise.js";
 import Food from "../model/food.js";
 import User from "../model/user.js";
+import Video from "../model/video.js";
 
 export const getUserData = async (req, res) => {
   try {
@@ -186,6 +187,27 @@ export const getUserFood = async (req, res) => {
       return res.status(404).json({ message: "User food not found" });
     }
     return res.status(200).json({ message: "Authenticated", userFood });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error getting user data" });
+  }
+};
+
+export const getExerciseVideos = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { category } = req.params;
+
+    const exercisevideos = await Video.find({ category });
+    if (!exercisevideos) {
+      return res.status(404).json({ message: "User food not found" });
+    }
+
+    return res.status(200).json({ message: "Authenticated", exercisevideos });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error getting user data" });
