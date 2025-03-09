@@ -56,8 +56,8 @@ const AnatomyLayout = () => {
                 {/* Video Thumbnail */}
                 <div className="mb-2">
                   <iframe
-                    src={`https://drive.google.com/file/d/${exercise.videoUrlID}/preview`}
-                    className="object-cover h-72 w-full"
+                    src={`https://drive.google.com/file/d/1DfFyj0YucdkRftFFWtwbVV2A7JwnYOs0/preview`}
+                    className="object-cover h-64 w-full"
                     style={{}}
                     allow="fullscreen"
                   ></iframe>

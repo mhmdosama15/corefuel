@@ -55,7 +55,7 @@ const testData = async () => {
   }
 };
 
-testData();
+// testData();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);

@@ -74,42 +74,47 @@ const Exercise = () => {
             Add Exercise
           </Link>
         </div>
-        <table className="w-full border-collapse border border-gray-900">
-          <thead>
-            <tr className="bg-blue-500 text-white">
-              <th className="border px-4 py-2"></th>
-              <th className="border px-4 py-2">Exercise Name</th>
-              <th className="border px-4 py-2">Exercise Type</th>
-              <th className="border px-4 py-2">Minutes</th>
-              <th className="border px-4 py-2">Calories Burned</th>
-              <th className="border px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {exercises.map((exercise, index) => (
-              <tr key={index} className="text-center">
-                <td className="border px-4 py-2">{index + 1}</td>
-                <td className="border px-4 py-2">{exercise.exerciseName}</td>
-                <td className="border px-4 py-2">{exercise.exerciseType}</td>
-                <td className="border px-4 py-2">
-                  {exercise.exerciseDuration}
-                </td>
-                <td className="border px-4 py-2">{exercise.caloriesBurned}</td>
-                {/* <td className="border px-4 py-2">
+        <div className="w-full overflow-scroll">
+          <table className="w-full border-collapse border border-gray-900">
+            <thead>
+              <tr className="bg-blue-500 text-white">
+                <th className="border px-4 py-2"></th>
+                <th className="border px-4 py-2">Exercise Name</th>
+                <th className="border px-4 py-2">Exercise Type</th>
+                <th className="border px-4 py-2">Minutes</th>
+                <th className="border px-4 py-2">Calories Burned</th>
+                <th className="border px-4 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {exercises.map((exercise, index) => (
+                <tr key={index} className="text-center">
+                  <td className="border px-4 py-2">{index + 1}</td>
+                  <td className="border px-4 py-2">{exercise.exerciseName}</td>
+                  <td className="border px-4 py-2">{exercise.exerciseType}</td>
+                  <td className="border px-4 py-2">
+                    {exercise.exerciseDuration}
+                  </td>
+                  <td className="border px-4 py-2">
+                    {exercise.caloriesBurned}
+                  </td>
+                  {/* <td className="border px-4 py-2">
                   {new Date(exercise.createdAt).toLocaleDateString()}
                 </td> */}
-                <td className="border flex items-center justify-center gap-2 py-2">
-                  <Link to={`/exercise/${exercise._id}`}>
-                    <FaEdit className="text-xl" />
-                  </Link>
-                  <button onClick={() => deleteExercise(exercise._id)}>
-                    <FaTrash className="text-red-500" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <td className="border flex items-center justify-center gap-2 py-2">
+                    <Link to={`/exercise/${exercise._id}`}>
+                      <FaEdit className="text-xl" />
+                    </Link>
+                    <button onClick={() => deleteExercise(exercise._id)}>
+                      <FaTrash className="text-red-500" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         {/* <div className="grid grid-cols-2 text-center gap-1  ">
           <div className="border rounded bg-blue-500 text-white text-center px-4 py-1">
             <p> Minutes</p>
