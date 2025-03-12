@@ -14,6 +14,7 @@ const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
   console.log(isLoggedIn);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
+  const categories = ["chest", "back", "shoulders", "legs"];
   const paths = [
     "/dashboard",
     "/exercise",
@@ -24,12 +25,14 @@ const Navbar = () => {
     "/settings",
     "/form-check",
     "/body-anatomy",
-    "/anatomy/chest",
-    "/anatomy/back",
-    "/anatomy/shoulders",
-    "/anatomy/legs",
-    "",
+    ...categories.map((cat) => `/anatomy/${cat}`),
+    "/anatomy/details/:id",
   ];
+
+  const isWhiteBg = paths.some((path) =>
+    location.pathname.startsWith(path.replace(/:\w+/g, ""))
+  );
+
   const logout = () => {
     dispatch(clearUser());
     navigate("/");
@@ -49,11 +52,9 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`flex  items-center   w-full  ${
-          paths.includes(location.pathname)
-            ? "bg-white pt-1 r"
-            : "bg-[#cfcfcf] fixed top-0 pt-1 left-0"
-        } `}
+        className={`flex items-center w-full ${
+          isWhiteBg ? "bg-white" : "bg-[#cfcfcf] fixed top-0 left-0"
+        }`}
       >
         <div className="flex flex-col h-full pt-2 lg:pt-4 w-full">
           <div className="px-4 lg:px-30 pb-2 lg:pb-4 flex items-center justify-between w-full">

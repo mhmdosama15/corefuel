@@ -24,17 +24,19 @@ export const getMotivationalQuote = async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
+
   const { goal, phase, activityLevel, struggle } = req.body;
   const now = new Date();
   const lastGenerated = user.lastQuoteGeneratedAt;
-  const hoursDiff = lastGenerated
-    ? (now - lastGenerated) / (1000 * 60 * 60)
-    : 25;
-  if (lastGenerated && hoursDiff < 24) {
+
+  const minutesDiff = lastGenerated ? (now - lastGenerated) / (1000 * 60) : 11;
+
+  if (lastGenerated && minutesDiff < 10) {
     return res
       .status(429)
-      .json({ message: "Quote already generated in the last 24 hours" });
+      .json({ message: "Quote already generated in the last 10 minutes" });
   }
+
   try {
     const result = await generateMotivationalQuote(
       goal,
@@ -42,8 +44,10 @@ export const getMotivationalQuote = async (req, res) => {
       struggle,
       activityLevel
     );
+
     user.lastQuoteGeneratedAt = now;
     await user.save();
+
     return res
       .status(200)
       .json({ message: "Motivational quote generated successfully", result });

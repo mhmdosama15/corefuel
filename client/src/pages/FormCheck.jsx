@@ -4,6 +4,7 @@ import AutoCompleteInput from "../components/AutoCompleteInput";
 import axios from "axios";
 import { BACKEND_URL } from "../utils";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 const FormCheck = () => {
   const [autocompleteValue, setAutocompleteValue] = useState(null);
   const [name, setName] = useState("");
@@ -123,16 +124,22 @@ const FormCheck = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          (exerciseData.length > 0 || showExerciseDetails) && // render if data exists or showExerciseDetails is true
+          (exerciseData.length > 0 || showExerciseDetails) &&
           exerciseData.map((data, index) => (
             <React.Fragment key={index}>
-              <div className="p-6 bg-white shadow-sm border h-96 border-[#dadada] rounded">
+              <Link
+                to={`https://drive.google.com/file/d/${data.videoUrlID}/view`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 bg-white group shadow-sm border h-96 overflow-hidden border-[#dadada] rounded"
+              >
                 <img
-                  src={PictureTwo}
-                  alt=""
-                  className="h-full w-full object-cover"
+                  src={`https://lh3.googleusercontent.com/d/${data.videoUrlID}=s600`}
+                  alt={data.title}
+                  className="w-full h-full group-hover:scale-105 transition duration-300 object-cover rounded-lg"
+                  loading="lazy"
                 />
-              </div>
+              </Link>
               <div className="p-6 bg-white shadow-sm border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">
                 <h2 className="text-lg font-semibold">{data.title}</h2>
                 <p className="text-gray-600">
