@@ -21,6 +21,7 @@ const Login = () => {
         password,
       });
       if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
         dispatch(setUser(response.data.user));
         dispatch(setAuth(true));
         dispatch(setToken(response.data.token));

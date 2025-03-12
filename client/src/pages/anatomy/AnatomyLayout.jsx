@@ -33,48 +33,58 @@ const AnatomyLayout = () => {
   }, [category]);
 
   return (
-    <div className="flex flex-col items-center px-6 lg:px-30 pb-20 lg:pb-30  gap-4 pt-10 lg:pt-24">
-      <h2 className="text-2xl pb-10">Chest Anatomy</h2>
-      <div className="grid grid-cols-3 gap-10">
-        {subCategories[category].map((name, index) => (
-          <h2 key={index} className="text-lg w-96 text-center font-semibold">
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </h2>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 gap-20">
-        {exercises.length > 0 &&
-          exercises.map((exercise, index) => {
-            const previewUrl = `https://drive.google.com/uc?export=view&id=${exercise.videoUrlID}`;
+    <div className="flex flex-col items-center px-6 lg:px-30 pb-20 lg:pb-30 gap-4 pt-10 lg:pt-24">
+      <h2 className="text-2xl pb-10 capitalize">{category} Anatomy</h2>
 
-            return (
-              <div
-                to={`/exercise/${exercise._id}`}
-                key={index}
-                className="transition duration-300 ease-linear hover:scale-105 border border-[#dadada] text-black text-center p-4 lg:w-96 rounded-lg"
-              >
-                {/* Video Thumbnail */}
-                <div className="mb-2">
-                  <iframe
-                    src={`https://drive.google.com/file/d/1DfFyj0YucdkRftFFWtwbVV2A7JwnYOs0/preview`}
-                    className="object-cover h-64 w-full"
-                    style={{}}
-                    allow="fullscreen"
-                  ></iframe>
-                </div>
-                {/* Video Title */}
+      {/* Loop through each subcategory */}
+      {subCategories[category]?.map((subCategoryName, index) => {
+        const filteredExercises = exercises.filter(
+          (exercise) =>
+            exercise.subCategory.toLowerCase() === subCategoryName.toLowerCase()
+        );
 
-                <h2 className="font-semibold pb-4">{exercise.title}</h2>
-                <Link
-                  to={"/anatomy/"}
-                  className="border px-4 py-2 rounded-lg border-[#dadada] bg-blue-500 hover:bg-blue-700  text-white"
+        return (
+          <div
+            key={index}
+            className="w-full flex flex-col  items-center justify-center"
+          >
+            {/* Subcategory Title */}
+            <h3 className="text-xl font-semibold text-center py-4">
+              {subCategoryName.length > 0 ? subCategoryName : "No exercises"}
+            </h3>
+
+            {/* Display exercises for this subcategory */}
+            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {filteredExercises.map((exercise) => (
+                <div
+                  key={exercise._id}
+                  className="transition duration-300 ease-linear hover:scale-105 border border-[#dadada] text-black text-center p-4 lg:w-96 rounded-lg"
                 >
-                  View Exercise details
-                </Link>
-              </div>
-            );
-          })}
-      </div>
+                  {/* Video Thumbnail */}
+                  <div className="mb-2">
+                    <img
+                      src={`https://lh3.googleusercontent.com/d/${exercise.videoUrlID}=s600`}
+                      alt={exercise.title}
+                      className="w-full h-[200px] object-cover rounded-lg"
+                    />
+                  </div>
+
+                  {/* Video Title */}
+                  <h2 className="font-semibold pb-4">{exercise.title}</h2>
+
+                  {/* View Details Button */}
+                  <Link
+                    to={`/anatomy/${exercise._id}`}
+                    className="border px-4 py-2 rounded-lg border-[#dadada] bg-blue-500 hover:bg-blue-700 text-white"
+                  >
+                    View Exercise details
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };

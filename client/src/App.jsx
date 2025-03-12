@@ -29,8 +29,8 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
   const authenticateUser = async () => {
+    const token = localStorage.getItem("token");
     if (!token) return;
     try {
       const response = await axios.get(`${BACKEND_URL}/api/auth`, {

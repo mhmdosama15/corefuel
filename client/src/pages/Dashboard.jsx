@@ -5,14 +5,14 @@ import { setMotivationalQuote } from "../redux/userSlice";
 import { BACKEND_URL } from "../utils";
 const Dashboard = () => {
   const username = useSelector((state) => state.auth.user.username);
-  const goal = useSelector((state) => state.auth.user?.metrics?.goals[0]);
+  // const goal = useSelector((state) => state.auth.user?.metrics?.goals[0]);
   const phase = useSelector((state) => state.auth.user?.metrics?.phase);
   const activityLevel = useSelector(
     (state) => state.auth.user.metrics.activityLevel
   );
-  const struggle = useSelector(
-    (state) => state.auth.user?.metrics?.struggles[0]
-  );
+  // const struggle = useSelector(
+  //   (state) => state.auth.user?.metrics?.struggles[0]
+  // );
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const quote = useSelector((state) => state.user.motivationalQuote);
@@ -20,7 +20,7 @@ const Dashboard = () => {
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/user/motivational-quote`,
-        { goal, phase, activityLevel, struggle },
+        { phase, activityLevel, struggle },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       console.log(response.data);

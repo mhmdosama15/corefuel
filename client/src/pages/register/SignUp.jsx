@@ -90,6 +90,7 @@ const SignUp = () => {
       console.log(response.data);
       if (response.status === 201) {
         sessionStorage.clear();
+        localStorage.setItem("token", response.data.token);
         dispatch(setToken(response.data.token));
         dispatch(setUser(response.data.user));
         dispatch(setAuth(true));
