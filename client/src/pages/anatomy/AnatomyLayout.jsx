@@ -10,7 +10,7 @@ const AnatomyLayout = () => {
   const subCategories = {
     chest: ["upper pec", "middle pec", "lower pec"],
     legs: ["hamstrings", "quadriceps", "calves"],
-    shoulder: ["anterior delt", "medial delt", "rear delt"],
+    shoulders: ["front delt", "middle delt", "rear delt", "traps"],
     back: ["upper back", "middle back", "lower back"],
   };
   const fetchExercises = async () => {
@@ -22,6 +22,10 @@ const AnatomyLayout = () => {
       console.log(response.data);
       if (response.status === 200) {
         setExercises(response.data.exercisevideos);
+        localStorage.setItem(
+          "exercises",
+          JSON.stringify(response.data.exercisevideos)
+        );
       }
     } catch (error) {
       console.log(error);
@@ -48,33 +52,26 @@ const AnatomyLayout = () => {
             key={index}
             className="w-full flex flex-col  items-center justify-center"
           >
-            {/* Subcategory Title */}
             <h3 className="text-xl font-semibold text-center py-4">
               {subCategoryName.length > 0 ? subCategoryName : "No exercises"}
             </h3>
-
-            {/* Display exercises for this subcategory */}
             <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-10">
               {filteredExercises.map((exercise) => (
                 <div
                   key={exercise._id}
                   className="transition duration-300 ease-linear hover:scale-105 border border-[#dadada] text-black text-center p-4 lg:w-96 rounded-lg"
                 >
-                  {/* Video Thumbnail */}
                   <div className="mb-2">
                     <img
                       src={`https://lh3.googleusercontent.com/d/${exercise.videoUrlID}=s600`}
                       alt={exercise.title}
-                      className="w-full h-[200px] object-cover rounded-lg"
+                      className="w-full h-96 object-cover rounded-lg"
+                      loading="lazy"
                     />
                   </div>
-
-                  {/* Video Title */}
                   <h2 className="font-semibold pb-4">{exercise.title}</h2>
-
-                  {/* View Details Button */}
                   <Link
-                    to={`/anatomy/${exercise._id}`}
+                    to={`/anatomy/details/${exercise._id}`}
                     className="border px-4 py-2 rounded-lg border-[#dadada] bg-blue-500 hover:bg-blue-700 text-white"
                   >
                     View Exercise details

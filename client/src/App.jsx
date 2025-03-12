@@ -107,7 +107,7 @@ function App() {
             }
           />
           <Route
-            path="/anatomy"
+            path="/anatomy/details/:id"
             element={
               <ProtectedRoute>
                 <Anatomy />

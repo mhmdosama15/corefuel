@@ -213,6 +213,25 @@ export const getExerciseVideos = async (req, res) => {
     return res.status(500).json({ message: "Error getting user data" });
   }
 };
+
+export const searchExercise = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { title } = req.body;
+    const search = await Video.find({ title: title });
+    if (!search) {
+      return res.status(404).json({ message: "No search results found" });
+    }
+    return res.status(200).json({ message: "Found exercise", search });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error searching exercise" });
+  }
+};
 // export const addExerciseNote = async (req, res) => {
 //   try {
 //     const userId = req.userId;

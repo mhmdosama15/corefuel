@@ -8,6 +8,7 @@ import {
   getUserExercises,
   getUserFood,
   saveFood,
+  searchExercise,
   searchFood,
 } from "../controller/userController.js";
 
@@ -21,5 +22,6 @@ router.post("/search-food", verifyUser, searchFood);
 router.post("/save-food", verifyUser, saveFood);
 router.get("/get-user-food", verifyUser, getUserFood);
 router.get("/get-exercises/:category", verifyUser, getExerciseVideos);
+router.post("/search-exercise", verifyUser, searchExercise);
 
 export default router;

@@ -1,21 +1,76 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PictureTwo from "../assets/images/pic2.jpg";
+import AutoCompleteInput from "../components/AutoCompleteInput";
+import axios from "axios";
+import { BACKEND_URL } from "../utils";
+import { useSelector } from "react-redux";
 const FormCheck = () => {
+  const [autocompleteValue, setAutocompleteValue] = useState(null);
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const token = useSelector((state) => state.auth.token);
+  const [showExerciseDetails, setShowExerciseDetails] = useState(false);
+  const [exerciseData, setExerciseData] = useState([]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!name) return;
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/user/search-exercise`,
+        {
+          title: name,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        setExerciseData(response.data.search);
+        setShowExerciseDetails(true);
+        localStorage.setItem(
+          "exerciseData",
+          JSON.stringify(response.data.search)
+        );
+        localStorage.setItem("showDetails", true);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    const storedData = localStorage.getItem("exerciseData");
+    const showDetails = localStorage.getItem("showDetails");
+    if (storedData) {
+      setExerciseData(JSON.parse(storedData));
+    }
+    if (storedData) {
+      setShowExerciseDetails(showDetails);
+    }
+  }, []);
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30  gap-4 pt-10 lg:pt-24">
       <h2 className="text-xl">Form Check</h2>
       <p>Enter the exercise you want to review for form checking.</p>
       <div className="grid xl:grid-cols-3 gap-8">
-        <form className=" flex  gap-10     ">
+        <form onSubmit={handleSubmit} className=" flex  gap-10     ">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3">
               <label htmlFor="exercise-name" className="text-lg font-bold">
                 Exercise Name:
               </label>
-              <input
+              {/* <input
                 id="exercise-name"
                 placeholder="e.g Chest Press"
                 className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
+              /> */}
+              <AutoCompleteInput
+                id={"exercise-name"}
+                placeholder={"e.g Chest press"}
+                setName={setName}
+                autocompleteValue={autocompleteValue}
+                setAutocompleteValue={setAutocompleteValue}
               />
             </div>
             {/* <div className="flex flex-col gap-3">
@@ -58,42 +113,45 @@ const FormCheck = () => {
            </div> */}
             <button
               type="submit"
+              disabled={loading}
               className="px-4 mt-6 py-2 rounded bg-blue-500 text-white w-32"
             >
               Search
             </button>
           </div>
         </form>
-        <div className="p-6 bg-white shadow-sm border h-96 border-[#dadada] rounded">
-          <img src={PictureTwo} alt="" className="h-full w-full object-cover" />
-        </div>
-        <div className="p-6 bg-white shadow-sm border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">
-          <h2 className="text-lg font-semibold">Chest Press</h2>
-          <p className="text-gray-600">
-            A strength training exercise that targets the chest, shoulders, and
-            triceps.
-          </p>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          (exerciseData.length > 0 || showExerciseDetails) && // render if data exists or showExerciseDetails is true
+          exerciseData.map((data, index) => (
+            <React.Fragment key={index}>
+              <div className="p-6 bg-white shadow-sm border h-96 border-[#dadada] rounded">
+                <img
+                  src={PictureTwo}
+                  alt=""
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-6 bg-white shadow-sm border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">
+                <h2 className="text-lg font-semibold">{data.title}</h2>
+                <p className="text-gray-600">
+                  Category: <span>{data.subCategory}</span>
+                </p>
 
-          <h3 className="mt-4 font-medium">Steps:</h3>
-          <ul className="list-decimal list-inside space-y-2">
-            <li>Lie flat on a bench with feet firmly on the ground.</li>
-            <li>
-              Hold the barbell or dumbbells with a firm grip, hands slightly
-              wider than shoulder-width.
-            </li>
-            <li>
-              Lower the weights slowly to your chest while keeping your elbows
-              at a 45-degree angle.
-            </li>
-            <li>
-              Push the weights back up until your arms are fully extended.
-            </li>
-            <li>
-              Repeat for the desired number of reps, maintaining control
-              throughout.
-            </li>
-          </ul>
-        </div>
+                <h3 className="mt-4 font-medium">Steps:</h3>
+                <ul className="list-disc pl-5">
+                  {data.description.split(". ").map((step, index) => (
+                    <li key={index}>
+                      <strong>{step.split(": ")[0]}:</strong>{" "}
+                      {step.split(": ")[1]}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </React.Fragment>
+          ))
+        )}
       </div>
     </div>
   );
