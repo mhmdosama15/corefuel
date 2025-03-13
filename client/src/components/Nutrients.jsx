@@ -1,14 +1,16 @@
 import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-
-const Nutrients = ({ food }) => {
+import axios from "axios";
+import { BACKEND_URL } from "../utils";
+const Nutrients = ({ food, deleteFood }) => {
   return (
-    <div className="overflow-x-auto w-full lg:w-2/4">
+    <div className="overflow-x-auto w-full">
       <table className=" table-auto">
         <thead>
           <tr className="bg-gray-200">
             <th className="px-4 w-3/4 py-2 text-left">Food Name</th>
             <th className="px-4 w-3/4 py-2 text-left">Calories</th>
+            <th className="px-4 w-3/4 py-2 text-left">Protein</th>
             <th className="px-4 w-3/4 py-2 text-left">Carbs</th>
             <th className="px-4 w-3/4 py-2 text-left">Fats</th>
             <th className="px-4 w-3/4 py-2 text-left">Sodium</th>
@@ -25,6 +27,9 @@ const Nutrients = ({ food }) => {
                   {item.foodMacros.calories.toFixed(2)}
                 </td>
                 <td className=" px-4 py-2">
+                  {item.foodMacros.protein.toFixed(2)}
+                </td>
+                <td className=" px-4 py-2">
                   {item.foodMacros.carbs.toFixed(2)}
                 </td>
                 <td className=" px-4 py-2">
@@ -37,7 +42,7 @@ const Nutrients = ({ food }) => {
                   {item.foodMacros.sugar.toFixed(2)}
                 </td>
                 <td className=" py-2">
-                  <button>
+                  <button onClick={() => deleteFood(item._id)}>
                     <FaTrash className="text-red-500" />
                   </button>
                 </td>

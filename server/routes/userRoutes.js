@@ -3,6 +3,8 @@ import { verifyUser } from "../controller/authController.js";
 import {
   createExercise,
   deleteExercise,
+  deleteFood,
+  generateUserCalories,
   getExerciseVideos,
   getMotivationalQuote,
   getUserExercises,
@@ -23,5 +25,7 @@ router.post("/save-food", verifyUser, saveFood);
 router.get("/get-user-food", verifyUser, getUserFood);
 router.get("/get-exercises/:category", verifyUser, getExerciseVideos);
 router.post("/search-exercise", verifyUser, searchExercise);
+router.get("/get-calories", verifyUser, generateUserCalories);
+router.post("/delete-food", verifyUser, deleteFood);
 
 export default router;

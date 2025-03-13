@@ -25,6 +25,7 @@ const foodSchema = new mongoose.Schema(
       fats: { type: Number, required: true },
       sodium: { type: Number, required: true },
       sugar: { type: Number, required: true },
+      protein: { type: Number, required: true },
     },
   },
   { timestamps: true }

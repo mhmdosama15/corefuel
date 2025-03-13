@@ -3,15 +3,23 @@ import Exercise from "../model/exercise.js";
 import Food from "../model/food.js";
 import User from "../model/user.js";
 import Video from "../model/video.js";
+import {
+  calculateBMR,
+  calculateDailyGoals,
+  calculateTDEE,
+  getCalorieIntake,
+} from "./metricsController.js";
 
 export const getUserData = async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await User.findById(userId).populate("metrics");
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    return res.status(200).json({ message: "Authenticated", user });
+    const userMetrics = await user.populate("metrics");
+    const metrics = userMetrics.metrics;
+    return res.status(200).json({ message: "Authenticated", metrics, user });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error getting user data" });
@@ -126,7 +134,7 @@ export const searchFood = async (req, res) => {
     }
     const { query } = req.body;
     const food = await getFoodInfo(query);
-    if (!food) {
+    if (!food || food.length === 0) {
       return res.status(404).json({ message: "Food not found" });
     }
     return res.status(200).json({ message: "Authenticated", food });
@@ -157,6 +165,9 @@ export const saveFood = async (req, res) => {
     const sugar = foodData.sugar
       ? parseFloat(foodData.sugar.replace(/[^\d.-]/g, ""))
       : 0;
+    const protein = foodData.protein
+      ? parseFloat(foodData.protein.replace(/[^\d.-]/g, ""))
+      : 0;
 
     const newFood = new Food({
       userId,
@@ -169,6 +180,7 @@ export const saveFood = async (req, res) => {
         fats: fats,
         sodium: sodium,
         sugar: sugar,
+        protein: protein,
       },
     });
     await newFood.save();
@@ -234,6 +246,81 @@ export const searchExercise = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error searching exercise" });
+  }
+};
+
+export const generateUserCalories = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const userWithMetrics = await user.populate("metrics");
+    const metrics = userWithMetrics.metrics;
+
+    if (!metrics) {
+      return res.status(400).json({ message: "User metrics not found" });
+    }
+
+    // Calculate user age from dob
+    const dob = new Date(metrics.dob);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+
+    const isBirthdayPassed =
+      today.getMonth() > dob.getMonth() ||
+      (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+
+    if (!isBirthdayPassed) {
+      age--;
+    }
+
+    const BMR = calculateBMR(
+      metrics.gender,
+      metrics.weight,
+      metrics.height,
+      age
+    );
+    const TDEE = calculateTDEE(BMR, metrics.activityLevel);
+    if (
+      !metrics.goals ||
+      !Array.isArray(metrics.goals) ||
+      metrics.goals.length === 0
+    ) {
+      return res.status(400).json({ message: "User has no goals set" });
+    }
+
+    const calorieTarget = getCalorieIntake(metrics.goals[0], TDEE);
+    const dailyGoals = calculateDailyGoals(calorieTarget, metrics.weight);
+
+    return res.status(200).json({
+      message: "Calories and goals generated",
+      calorieTarget,
+      dailyGoals,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error generating calories" });
+  }
+};
+
+export const deleteFood = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const { foodId } = req.body;
+    const food = await Food.findOneAndDelete({ _id: foodId });
+    if (!food) {
+      return res.status(404).json({ message: "Food not found" });
+    }
+    return res.status(200).json({ message: "Food deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error deleting food" });
   }
 };
 // export const addExerciseNote = async (req, res) => {

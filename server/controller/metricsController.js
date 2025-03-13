@@ -49,3 +49,30 @@ export const getCalorieIntake = (goal, tdee) => {
       return tdee;
   }
 };
+
+export const calculateDailyGoals = (calorieTarget, weight) => {
+  // Default macro split: 50% carbs, 30% fats, 20% protein
+  const protein = Math.round(weight * 1.6); // 1.6 g/kg body weight
+  const proteinCalories = protein * 4; // 1 g protein = 4 kcal
+  const remainingCalories = calorieTarget - proteinCalories;
+
+  // Split remaining calories between carbs and fats
+  const carbsCalories = remainingCalories * 0.6; // 60% of remaining calories for carbs
+  const fatsCalories = remainingCalories * 0.4; // 40% of remaining calories for fats
+
+  const carbs = Math.round(carbsCalories / 4); // 1 g carbs = 4 kcal
+  const fats = Math.round(fatsCalories / 9); // 1 g fats = 9 kcal
+
+  // Default sodium and sugar goals
+  const sodium = 2300; // FDA upper limit
+  const sugar = Math.round((calorieTarget * 0.1) / 4); // 10% of calories from sugar (WHO guideline)
+
+  return {
+    calories: Math.round(calorieTarget),
+    protein,
+    carbs,
+    fats,
+    sodium,
+    sugar,
+  };
+};

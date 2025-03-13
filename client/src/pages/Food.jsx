@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BACKEND_URL } from "../utils";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setUserFoodData } from "../redux/userSlice";
 
 const Food = () => {
   const [food, setFood] = useState(localStorage.getItem("foodTitle") || "");
@@ -13,30 +12,45 @@ const Food = () => {
   const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(false);
   const [foodData, setFoodData] = useState({});
+  const [foodErr, setFoodErr] = useState(false);
   const [showFoodData, setShowFoodData] = useState(false);
   const [showFoodNutrition, setShowFoodNutrition] = useState(false);
   const [foodType, setFoodType] = useState("breakfast");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const searchFood = async () => {
-    if (!food) return;
+    if (!food) {
+      setFoodErr("Please enter a food item");
+      return;
+    }
     setLoading(true);
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/user/search-food`,
-        {
-          query: food,
-        },
+        { query: food },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
-      if (response.status === 200) {
+      console.log("Response:", response.data); // Debug this!
+
+      if (response.status === 200 && response.data.food) {
         setResult(response.data.food);
         localStorage.setItem("foodTitle", food);
         localStorage.setItem("foodResult", JSON.stringify(response.data.food));
+        setFoodErr("");
+      } else {
+        throw new Error("Unexpected response");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error:", error);
+      if (error.response?.status === 404) {
+        setFoodErr(error.response.data.message || "Food not found");
+      } else {
+        setFoodErr("Something went wrong");
+      }
+      setResult([]);
+
+      localStorage.removeItem("foodTitle");
+      localStorage.removeItem("foodResult");
     } finally {
       setLoading(false);
     }
@@ -114,7 +128,7 @@ const Food = () => {
         <p>Loading...</p>
       ) : (
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-3 ">
-          {result.length > 0 && (
+          {result.length > 0 ? (
             <div className="border border-[#dadada] rounded-md overflow-scroll p-3 flex flex-col gap-2 min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
               <ul className="">
                 {Array.isArray(result) &&
@@ -143,6 +157,8 @@ const Food = () => {
                   ))}
               </ul>
             </div>
+          ) : (
+            <p className="text-gray-400 text-center">{foodErr}</p>
           )}
           {showFoodData && (
             <div className="border border-[#dadada] rounded-md overflow-scroll p-3 flex flex-col justify-between gap-4 text-center min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
@@ -221,8 +237,8 @@ const Food = () => {
                   <li>
                     Fat:{" "}
                     <span className="font-bold">
-                      {parseFloat(foodData?.fat)?.toFixed(2) || "N/A"}{" "}
-                      {foodData?.fat?.replace(/[0-9.-]/g, "").trim() || ""}
+                      {parseFloat(foodData?.fats)?.toFixed(2) || "N/A"}{" "}
+                      {foodData?.fats?.replace(/[0-9.-]/g, "").trim() || ""}
                     </span>
                   </li>
                   <li>

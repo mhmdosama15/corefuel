@@ -13,7 +13,7 @@ export const generateMotivationalQuote = async (
 ) => {
   const genAI = new GoogleGenerativeAI(`${process.env.GEMINI_KEY}`);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const prompt = `Motivate me with a motivational quote based on goal: ${goal}, phase: ${phase}, struggle: ${struggle}, activity level: ${activityLevel}.`;
+  const prompt = `Give me a short and impactful motivational quote based on my fitness journey. My goal is ${goal}, I’m currently in the ${phase} phase, struggling with ${struggle}, and my activity level is ${activityLevel}. Make it inspiring and to the point.`;
 
   const result = await model.generateContent(prompt);
   return result.response.text();
@@ -42,7 +42,7 @@ export const getFoodInfo = async (query) => {
 };
 
 const extractRecipeData = (recipe) => {
-  let calories, fat, sodium, carbs, sugar, image, title, mealType;
+  let calories, fats, sodium, carbs, sugar, image, title, protein, mealType;
   if (recipe.recipe) {
     calories = recipe.recipe.calories / recipe.recipe.yield || 0;
     title = recipe.recipe.label || "Unknown Title";
@@ -50,7 +50,7 @@ const extractRecipeData = (recipe) => {
     mealType = recipe.recipe.mealType || "Unknown Meal Type";
     const nutrients = recipe.recipe.totalNutrients || {};
 
-    fat = nutrients.FAT
+    fats = nutrients.FAT
       ? nutrients.FAT.quantity + " " + nutrients.FAT.unit
       : "N/A";
     sodium = nutrients.NA
@@ -62,15 +62,19 @@ const extractRecipeData = (recipe) => {
     sugar = nutrients.SUGAR
       ? nutrients.SUGAR.quantity + " " + nutrients.SUGAR.unit
       : "N/A";
+    protein = nutrients.PROCNT
+      ? nutrients.PROCNT.quantity + " " + nutrients.PROCNT.unit
+      : "N/A";
   }
   return {
     title,
     image,
     calories,
-    fat,
+    fats,
     sodium,
     carbs,
     sugar,
+    protein,
     mealType,
   };
 };

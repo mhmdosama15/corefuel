@@ -26,6 +26,7 @@ import { setAuth, setToken, setUser } from "./redux/authSlice";
 import axios from "axios";
 import { BACKEND_URL } from "./utils";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import { setUserMetrics } from "./redux/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,8 +42,8 @@ function App() {
       if (response.status === 200) {
         dispatch(setAuth(true));
         dispatch(setUser(response.data.user));
+        dispatch(setUserMetrics(response.data.metrics));
       }
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
