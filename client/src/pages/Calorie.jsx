@@ -10,19 +10,21 @@ const Calorie = () => {
   const calculateCalories = (e) => {
     e.preventDefault();
 
-    // MET values (approximate): Cardio (8 METs), Strength Training (6 METs)
-    const cardioCalories = (8 * weight * (cardio / 60)).toFixed(2);
-    const workoutCalories = (6 * weight * (workout / 60)).toFixed(2);
+    // MET values (extra effort only)
+    const cardioMET = 7; // 8 - 1 (resting)
+    const workoutMET = 5; // 6 - 1 (resting)
+    const cardioCalories = (cardioMET * weight * (cardio / 60)).toFixed(2);
+    const workoutCalories = (workoutMET * weight * (workout / 60)).toFixed(2);
 
-    // BMR Calculation (using height and weight, ignoring age)
-    // Mifflin-St Jeor Equation (ignoring age, assuming male by default)
-    const bmr = (10 * weight + 6.25 * height).toFixed(2); // Removed age factor
+    // Full BMR (assume male, age 30 for example)
+    const bmr = (10 * weight + 6.25 * height - 5 * 30 + 5).toFixed(2);
+    const exerciseHours = (cardio + workout) / 60;
+    const restingCalories = ((bmr * (24 - exerciseHours)) / 24).toFixed(2);
 
-    // Total Calories = Calories burned from exercise + BMR
     const totalCalories = (
+      parseFloat(restingCalories) +
       parseFloat(cardioCalories) +
-      parseFloat(workoutCalories) +
-      parseFloat(bmr)
+      parseFloat(workoutCalories)
     ).toFixed(2);
 
     setCaloriesBurned(totalCalories);
