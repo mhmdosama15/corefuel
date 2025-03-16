@@ -13,8 +13,7 @@ export const generateMotivationalQuote = async (
 ) => {
   const genAI = new GoogleGenerativeAI(`${process.env.GEMINI_KEY}`);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const prompt = `Give me a short and impactful motivational quote based on my fitness journey. My goal is ${goal}, I’m currently in the ${phase} phase, struggling with ${struggle}, and my activity level is ${activityLevel}. Make it inspiring and to the point.`;
-
+  const prompt = `Generate a short, impactful, and unique motivational quote tailored to my fitness journey. My goal is ${goal}, I’m currently in the ${phase} phase, struggling with ${struggle}, and my activity level is ${activityLevel}. Ensure the quote is fresh and distinct from common fitness quotes by incorporating an unexpected metaphor, a vivid action-oriented verb, or a surprising perspective. Avoid clichés like "keep pushing" or "never give up," and do not repeat themes or phrases from previously generated quotes. Make it inspiring, concise (under 20 words), and relevant to my specific journey.`;
   const result = await model.generateContent(prompt);
   return result.response.text();
 };

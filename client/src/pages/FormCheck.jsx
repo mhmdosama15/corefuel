@@ -131,16 +131,16 @@ const FormCheck = () => {
                 to={`https://drive.google.com/file/d/${data.videoUrlID}/view`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-6 bg-white group shadow-sm border h-96 overflow-hidden border-[#dadada] rounded"
+                className=" bg-white group shadow-sm border h-96 overflow-hidden border-[#dadada] rounded"
               >
                 <img
                   src={`https://lh3.googleusercontent.com/d/${data.videoUrlID}=s600`}
                   alt={data.title}
-                  className="w-full h-full group-hover:scale-105 transition duration-300 object-cover rounded-lg"
+                  className="w-full h-full group-hover:scale-105 transition duration-300 object-cover "
                   loading="lazy"
                 />
               </Link>
-              <div className="p-6 bg-white shadow-sm border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">
+              <div className="p-6 bg-white shadow-sm hide-scrollbar border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">
                 <h2 className="text-lg font-semibold">{data.title}</h2>
                 <p className="text-gray-600">
                   Category: <span>{data.subCategory}</span>

@@ -31,6 +31,13 @@ const userSlice = createSlice({
     setUserMetrics: (state, action) => {
       state.metrics = action.payload;
     },
+    resetUserSlice: (state) => {
+      state.exercises = [];
+      state.note = null;
+      state.macrosTotals = null;
+      state.dailyGoals = null;
+      state.metrics = null;
+    },
   },
 });
 
@@ -41,5 +48,6 @@ export const {
   setUserDailyGoals,
   setMacrosTotals,
   setUserMetrics,
+  resetUserSlice,
 } = userSlice.actions;
 export default userSlice.reducer;

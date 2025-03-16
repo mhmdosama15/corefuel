@@ -59,13 +59,13 @@ const AnatomyLayout = () => {
               {filteredExercises.map((exercise) => (
                 <div
                   key={exercise._id}
-                  className="transition duration-300 ease-linear hover:scale-105 border border-[#dadada] text-black text-center p-4 lg:w-96 rounded-lg"
+                  className="transition duration-300 ease-linear hover:scale-105 border pb-4 border-[#dadada] text-black text-center lg:w-96 rounded-lg"
                 >
                   <div className="mb-2">
                     <img
                       src={`https://lh3.googleusercontent.com/d/${exercise.videoUrlID}=s600`}
                       alt={exercise.title}
-                      className="w-full h-96 object-cover rounded-lg"
+                      className="w-full h-96 object-cover "
                       loading="lazy"
                     />
                   </div>

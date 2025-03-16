@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BACKEND_URL } from "../utils";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Food = () => {
   const [food, setFood] = useState(localStorage.getItem("foodTitle") || "");
@@ -10,12 +10,14 @@ const Food = () => {
     JSON.parse(localStorage.getItem("foodResult")) || []
   );
   const token = useSelector((state) => state.auth.token);
+  const location = useLocation();
+  const passedFoodType = location.state?.foodType || "breakfast";
   const [loading, setLoading] = useState(false);
   const [foodData, setFoodData] = useState({});
   const [foodErr, setFoodErr] = useState(false);
   const [showFoodData, setShowFoodData] = useState(false);
   const [showFoodNutrition, setShowFoodNutrition] = useState(false);
-  const [foodType, setFoodType] = useState("breakfast");
+  const [foodType, setFoodType] = useState(passedFoodType);
   const navigate = useNavigate();
 
   const searchFood = async () => {
@@ -129,7 +131,7 @@ const Food = () => {
       ) : (
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-3 ">
           {result.length > 0 ? (
-            <div className="border border-[#dadada] rounded-md overflow-scroll p-3 flex flex-col gap-2 min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
+            <div className="border border-[#dadada] rounded-md overflow-scroll hide-scrollbar p-3 flex flex-col gap-2 min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
               <ul className="">
                 {Array.isArray(result) &&
                   result.map((item, index) => (
@@ -161,7 +163,7 @@ const Food = () => {
             <p className="text-gray-400 text-center">{foodErr}</p>
           )}
           {showFoodData && (
-            <div className="border border-[#dadada] rounded-md overflow-scroll p-3 flex flex-col justify-between gap-4 text-center min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
+            <div className="border border-[#dadada] rounded-md overflow-scroll hide-scrollbar p-3 flex flex-col justify-between gap-4 text-center min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
               <div className="flex flex-col gap-4">
                 <h2 className="font-bold text-center text-xl">
                   {foodData?.title}
@@ -204,7 +206,7 @@ const Food = () => {
             </div>
           )}
           {showFoodNutrition && (
-            <div className="border border-[#dadada] rounded-md overflow-scroll p-3 flex flex-col justify-between gap-4 text-center min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
+            <div className="border border-[#dadada] rounded-md overflow-scroll hide-scrollbar p-3 flex flex-col justify-between gap-4 text-center min-h-96 max-h-96 md:w-full lg:min-w-96 lg:max-w-96">
               <div className="flex flex-col gap-4">
                 <h2 className="font-bold text-center text-xl">
                   {foodData?.title}

@@ -153,21 +153,13 @@ const Nutrition = () => {
 
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-10 lg:pb-30 gap-2 pt-10 lg:pt-24">
-      <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center border-b border-b-[#dadada] pb-10 lg:gap-20">
-        <p>Your Food diary for:</p>
-        <div>{today}</div>
-        <div className="flex flex-col text-sm">
-          <label htmlFor="date">Check date</label>
-          <input type="date" id="date" className="border px-4 py-2" />
-        </div>
-      </div>
-
       {/* Breakfast Section */}
       <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Breakfast</p>
           <Link
             to={"/food"}
+            state={{ foodType: "breakfast" }}
             className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
           >
             Add Food
@@ -182,6 +174,7 @@ const Nutrition = () => {
           <p>Lunch</p>
           <Link
             to={"/food"}
+            state={{ foodType: "lunch" }}
             className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
           >
             Add Food
@@ -196,6 +189,7 @@ const Nutrition = () => {
           <p>Dinner</p>
           <Link
             to={"/food"}
+            state={{ foodType: "dinner" }}
             className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
           >
             Add Food
@@ -210,6 +204,7 @@ const Nutrition = () => {
           <p>Snacks</p>
           <Link
             to={"/food"}
+            state={{ foodType: "snack" }}
             className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
           >
             Add Food

@@ -71,7 +71,7 @@ const CaloriesCard = () => {
               {remainingCalories.toFixed(0)}
             </text>
           </svg>
-          <span className="absolute text-sm mt-20 md:mt-24 lg:mt-32">
+          <span className="absolute text-sm mt-8 md:mt-24 lg:mt-32">
             remaining
           </span>
         </div>

@@ -92,6 +92,14 @@ function App() {
             }
           />
           <Route
+            path="/exercise/edit/:id"
+            element={
+              <ProtectedRoute>
+                <ExerciseForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/body-anatomy"
             element={
               <ProtectedRoute>
@@ -135,7 +143,7 @@ function App() {
             path="/settings"
             element={
               <ProtectedRoute>
-                <Settings />
+                <Settings authenticateUser={authenticateUser} />
               </ProtectedRoute>
             }
           />

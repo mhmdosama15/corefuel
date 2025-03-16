@@ -7,7 +7,7 @@ const BurgerMenu = ({ closeMenu, isLoggedIn, logout }) => {
     closeMenu();
   };
   return (
-    <div className="fixed left-0 top-16 right-0 bottom-0 bg-white ">
+    <div className="fixed left-0 top-16 right-0 bottom-0 z-20 bg-white ">
       {isLoggedIn ? (
         <div className="px-4 pt-4 h-full flex flex-col w-full justify-between">
           <ul className="flex flex-col w-full gap-4">

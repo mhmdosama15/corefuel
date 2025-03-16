@@ -6,6 +6,7 @@ import BurgerMenu from "./BurgerMenu";
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../redux/authSlice";
+import { resetUserSlice } from "../redux/userSlice";
 const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch(clearUser());
+    dispatch(resetUserSlice());
     navigate("/");
   };
   useEffect(() => {

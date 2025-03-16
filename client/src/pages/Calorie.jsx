@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Calorie = () => {
   const [cardio, setCardio] = useState(0);
@@ -6,30 +7,40 @@ const Calorie = () => {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [caloriesBurned, setCaloriesBurned] = useState(null);
+  const dob = useSelector((state) => state.user.metrics?.dob);
+  const dateOFBirth = new Date(dob);
+  const today = new Date();
+  let age = today.getFullYear() - dateOFBirth.getFullYear();
+
+  const isBirthdayPassed =
+    today.getMonth() > dateOFBirth.getMonth() ||
+    (today.getMonth() === dateOFBirth.getMonth() &&
+      today.getDate() >= dateOFBirth.getDate());
+
+  if (!isBirthdayPassed) {
+    age--;
+  }
 
   const calculateCalories = (e) => {
     e.preventDefault();
 
-    // MET values (extra effort only)
-    const cardioMET = 7; // 8 - 1 (resting)
-    const workoutMET = 5; // 6 - 1 (resting)
-    const cardioCalories = (cardioMET * weight * (cardio / 60)).toFixed(2);
-    const workoutCalories = (workoutMET * weight * (workout / 60)).toFixed(2);
+    // Adjusted MET values: Cardio (6 METs), Strength Training (4 METs)
+    const cardioCalories = (6 * weight * (cardio / 60)).toFixed(2);
+    const workoutCalories = (4 * weight * (workout / 60)).toFixed(2);
 
-    // Full BMR (assume male, age 30 for example)
-    const bmr = (10 * weight + 6.25 * height - 5 * 30 + 5).toFixed(2);
-    const exerciseHours = (cardio + workout) / 60;
-    const restingCalories = ((bmr * (24 - exerciseHours)) / 24).toFixed(2);
+    // BMR Calculation (using height, weight, and age)
+    // Mifflin-St Jeor Equation (including age factor)
+    const bmr = (10 * weight + 6.25 * height - 5 * age + 5).toFixed(2); // Added age factor
 
+    // Total Calories = Calories burned from exercise + BMR
     const totalCalories = (
-      parseFloat(restingCalories) +
       parseFloat(cardioCalories) +
-      parseFloat(workoutCalories)
+      parseFloat(workoutCalories) +
+      parseFloat(bmr)
     ).toFixed(2);
 
     setCaloriesBurned(totalCalories);
   };
-
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30 gap-6 pt-10 lg:pt-20">
       <div className="flex flex-col gap-8 items-center bg-[#efefef] p-4 rounded">

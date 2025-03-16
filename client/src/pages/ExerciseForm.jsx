@@ -1,42 +1,85 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utils";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 const ExerciseForm = () => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseType, setExerciseType] = useState("cardio");
   const [exerciseDuration, setExerciseDuration] = useState("");
   const [caloriesBurned, setCaloriesBurned] = useState("");
+  const [isEditData, setIsEditData] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  const location = useLocation();
+  const exercise = location.state?.exercise;
+  useEffect(() => {
+    if (exercise) {
+      console.log(exercise);
+      setIsEditData(true);
+      setExerciseName(exercise.exerciseName);
+      setExerciseType(exercise.exerciseType);
+      setExerciseDuration(exercise.exerciseDuration);
+      setCaloriesBurned(exercise.caloriesBurned);
+    }
+  }, [exercise]);
+  const { id } = useParams();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await axios.post(
-        `${BACKEND_URL}/api/user/add-exercise`,
-        {
-          exerciseName,
-          exerciseType,
-          exerciseDuration,
-          caloriesBurned,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log(response.data);
-      if (response.status === 200) {
-        setExerciseName("");
-        setExerciseType("cardio");
-        setExerciseDuration("");
-        setCaloriesBurned("");
-        navigate("/exercise");
+    console.log("data sent", {
+      exerciseName,
+      exerciseType,
+      exerciseDuration,
+      caloriesBurned,
+    });
+    if (isEditData) {
+      try {
+        const response = await axios.patch(
+          `${BACKEND_URL}/api/user/edit-exercise/${id}`,
+          {
+            exerciseName,
+            exerciseType,
+            exerciseDuration,
+            caloriesBurned,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log(response.data);
+        if (response.status === 200) {
+          navigate("/exercise");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+    } else {
+      try {
+        const response = await axios.post(
+          `${BACKEND_URL}/api/user/add-exercise`,
+          {
+            exerciseName,
+            exerciseType,
+            exerciseDuration,
+            caloriesBurned,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log(response.data);
+        if (response.status === 200) {
+          setExerciseName("");
+          setExerciseType("cardio");
+          setExerciseDuration("");
+          setCaloriesBurned("");
+          navigate("/exercise");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
   return (

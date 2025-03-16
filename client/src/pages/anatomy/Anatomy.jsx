@@ -34,12 +34,12 @@ const Anatomy = ({}) => {
           to={`https://drive.google.com/file/d/${exerciseData.videoUrlID}/view`}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-6 bg-white group shadow-sm border h-96 overflow-hidden border-[#dadada] rounded"
+          className=" bg-white group shadow-sm border h-96 w-full lg:w-80 lg:max-w-80 overflow-hidden border-[#dadada] rounded"
         >
           <img
             src={`https://lh3.googleusercontent.com/d/${exerciseData.videoUrlID}=s600`}
             alt={exerciseData.title}
-            className="w-full h-full group-hover:scale-105 transition duration-300 object-cover rounded-lg"
+            className="w-full h-full group-hover:scale-105 transition duration-300 object-cover"
             loading="lazy"
           />
         </Link>

@@ -1,23 +1,32 @@
 import express from "express";
 import { verifyUser } from "../controller/authController.js";
+import { getMotivationalQuote } from "../controller/userController.js";
 import {
+  generateUserCalories,
+  updateMetrics,
+} from "../controller/metricsController.js";
+import {
+  addExerciseNote,
   createExercise,
   deleteExercise,
-  deleteFood,
-  generateUserCalories,
+  getExerciseNote,
   getExerciseVideos,
-  getMotivationalQuote,
   getUserExercises,
+  searchExercise,
+  updateExercise,
+} from "../controller/exerciseController.js";
+import {
+  deleteFood,
   getUserFood,
   saveFood,
-  searchExercise,
   searchFood,
-} from "../controller/userController.js";
+} from "../controller/foodController.js";
 
 const router = express.Router();
 
 router.post("/motivational-quote", verifyUser, getMotivationalQuote);
 router.post("/add-exercise", verifyUser, createExercise);
+router.patch("/edit-exercise/:id", verifyUser, updateExercise);
 router.post("/delete-exercise", verifyUser, deleteExercise);
 router.get("/get-exercises", verifyUser, getUserExercises);
 router.post("/search-food", verifyUser, searchFood);
@@ -27,5 +36,8 @@ router.get("/get-exercises/:category", verifyUser, getExerciseVideos);
 router.post("/search-exercise", verifyUser, searchExercise);
 router.get("/get-calories", verifyUser, generateUserCalories);
 router.post("/delete-food", verifyUser, deleteFood);
+router.post("/save-exercise-note", verifyUser, addExerciseNote);
+router.get("/get-exercise-notes", verifyUser, getExerciseNote);
+router.patch("/update-metrics", verifyUser, updateMetrics);
 
 export default router;

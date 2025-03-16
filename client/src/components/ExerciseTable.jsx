@@ -17,7 +17,7 @@ const ExerciseTable = () => {
         `${BACKEND_URL}/api/user/get-exercises`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
+
       if (response.status === 200) {
         setExercises(response.data.userExercises);
         dispatch(setUserExercises(response.data.userExercises));
@@ -35,7 +35,7 @@ const ExerciseTable = () => {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(response.data);
+
       if (response.status === 200) {
         getUserExercises();
       }
@@ -47,7 +47,7 @@ const ExerciseTable = () => {
     getUserExercises();
   }, []);
   return (
-    <div className="w-full overflow-scroll">
+    <div className="w-full overflow-scroll hide-scrollbar">
       <table className="w-full border-collapse border border-gray-900">
         <thead>
           <tr className="bg-blue-500 text-white">
@@ -60,28 +60,44 @@ const ExerciseTable = () => {
           </tr>
         </thead>
         <tbody>
-          {exercises.map((exercise, index) => (
-            <tr key={index} className="text-center">
-              <td className="border px-4 py-2">{index + 1}</td>
-              <td className="border px-4 py-2">{exercise.exerciseName}</td>
-              <td className="border px-4 py-2">{exercise.exerciseType}</td>
-              <td className="border px-4 py-2">{exercise.exerciseDuration}</td>
-              <td className="border px-4 py-2">{exercise.caloriesBurned}</td>
-              {/* <td className="border px-4 py-2">
+          {exercises.length > 0 ? (
+            exercises.map((exercise, index) => (
+              <tr key={index} className="text-center">
+                <td className="border px-4 py-2">{index + 1}</td>
+                <td className="border px-4 py-2">{exercise.exerciseName}</td>
+                <td className="border px-4 py-2">{exercise.exerciseType}</td>
+                <td className="border px-4 py-2">
+                  {exercise.exerciseDuration}
+                </td>
+                <td className="border px-4 py-2">{exercise.caloriesBurned}</td>
+                {/* <td className="border px-4 py-2">
             {new Date(exercise.createdAt).toLocaleDateString()}
           </td> */}
-              {!isDashboard && (
-                <td className="border flex items-center justify-center gap-2 py-2">
-                  <Link to={`/exercise/${exercise._id}`}>
-                    <FaEdit className="text-xl" />
-                  </Link>
-                  <button onClick={() => deleteExercise(exercise._id)}>
-                    <FaTrash className="text-red-500" />
-                  </button>
-                </td>
-              )}
+                {!isDashboard && (
+                  <td className="border flex items-center justify-center gap-2 py-2">
+                    <Link
+                      to={`/exercise/edit/${exercise._id}`}
+                      state={{ exercise }}
+                    >
+                      <FaEdit className="text-xl" />
+                    </Link>
+                    <button onClick={() => deleteExercise(exercise._id)}>
+                      <FaTrash className="text-red-500" />
+                    </button>
+                  </td>
+                )}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan={isDashboard ? 5 : 6}
+                className="border px-4 py-2 text-center"
+              >
+                You have no exercises yet.
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
