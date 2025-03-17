@@ -41,19 +41,19 @@ const MetricsForm = ({ setShowMetrics, authenticateUser }) => {
     return new Date(isoDate).toISOString().split("T")[0];
   };
 
-  const metrics = useSelector((state) => state.user.metrics);
+  const metrics = useSelector((state) => state.user?.metrics);
 
-  const [gender, setGender] = useState(metrics.gender || "male");
-  const [location, setLocation] = useState(metrics.location || "Egypt");
-  const [weight, setWeight] = useState(metrics.weight || 70);
-  const [goalWeight, setGoalWeight] = useState(metrics.goalWeight || 70);
+  const [gender, setGender] = useState(metrics?.gender || "male");
+  const [location, setLocation] = useState(metrics?.location || "Egypt");
+  const [weight, setWeight] = useState(metrics?.weight || 70);
+  const [goalWeight, setGoalWeight] = useState(metrics?.goalWeight || 70);
   const [phase, setPhase] = useState(
     metrics.phase || "Lean Bulk: Gaining muscle with a bit of fat"
   );
 
-  const [dob, setDob] = useState(formatDateForInput(metrics.dob));
+  const [dob, setDob] = useState(formatDateForInput(metrics?.dob));
 
-  const [height, setHeight] = useState(metrics.height || 170);
+  const [height, setHeight] = useState(metrics?.height || 170);
   const [activityLevel, setActivityLevel] = useState(
     metrics.activityLevel || "Active"
   );
@@ -64,7 +64,7 @@ const MetricsForm = ({ setShowMetrics, authenticateUser }) => {
   const struggles = metrics?.struggles || [];
   const [selectedGoals, setSelectedGoals] = useState([]);
   const [selectedStruggles, setSelectedStruggles] = useState([]);
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth?.token);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const dispatch = useDispatch();
