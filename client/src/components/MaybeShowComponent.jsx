@@ -6,8 +6,13 @@ const MaybeShowComponent = ({ children }) => {
   const location = useLocation();
 
   useEffect(() => {
-    const hidePaths = ["/"];
-    setShowComponent(!hidePaths.includes(location.pathname));
+    const hidePaths = ["/", "/verify-email"];
+    const shouldHide = hidePaths.some(
+      (path) =>
+        location.pathname === path ||
+        location.pathname.startsWith("/verify-email/")
+    );
+    setShowComponent(!shouldHide);
   }, [location]);
 
   return showComponent ? <div>{children}</div> : null;

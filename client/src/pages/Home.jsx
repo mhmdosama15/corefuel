@@ -11,15 +11,15 @@ const Home = () => {
   const token = useSelector((state) => state.auth.token);
   const gridDetails = [
     {
-      title: "Fitness Quote",
+      title: "Workout Programs",
       picture: PictureThree,
     },
     {
-      title: "Food Quote",
+      title: "Nutritional Plan",
       picture: PictureTwo,
     },
     {
-      title: "Working out Quote",
+      title: "Fitness Evaluation",
       picture: PictureOne,
     },
   ];
@@ -49,8 +49,12 @@ const Home = () => {
       </nav>
       <div className="flex flex-col gap-10 items-center justify-center h-full pt-24  w-full">
         <div className="text-center">
-          <h2 className="text-xl">Welcome to</h2>
-          <p className="text-xl">CoreFuel</p>
+          <h2 className="text-2xl lg:text-4xl bg-gradient-to-br font-bold from-[#1431a4] to-[#FF8C00] bg-clip-text text-transparent">
+            Welcome to
+          </h2>
+          <p className="text-3xl lg:text-6xl font-bold bg-gradient-to-r from-[#1431a4] to-[#0e71af] bg-clip-text text-transparent">
+            CoreFuel
+          </p>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
           {gridDetails.map((detail, index) => (
@@ -64,7 +68,7 @@ const Home = () => {
         <div className="pb-20">
           <Link
             to={"/starter/step-1"}
-            className=" bg-blue-500 px-4 py-2 rounded-lg text-white hover:bg-blue-700"
+            className=" bg-blue-500 px-4 py-2 lg:px-8 font-bold lg:text-2xl lg:py-4 rounded-lg text-white hover:bg-blue-700"
           >
             Continue
           </Link>

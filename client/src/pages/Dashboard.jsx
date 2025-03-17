@@ -6,6 +6,7 @@ import { BACKEND_URL } from "../utils";
 import ExerciseTable from "../components/ExerciseTable";
 import Macros from "../components/Macros";
 import CaloriesCard from "../components/CaloriesCard";
+import EmailPrompt from "../components/EmailPrompt";
 const Dashboard = () => {
   const username = useSelector((state) => state.auth.user?.username);
   const goal = useSelector((state) => state.user?.metrics?.goals[0]);
@@ -17,7 +18,7 @@ const Dashboard = () => {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
   const quote = useSelector((state) => state.user.motivationalQuote);
-
+  const [showVerifyEmail, setShowVerifyEmail] = useState(false);
   // Daily goals (you can adjust these as needed)
   const defaultGoals = {
     calories: 2000,
@@ -63,6 +64,10 @@ const Dashboard = () => {
   }, []);
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-20">
+      <EmailPrompt
+        showVerifyEmail={showVerifyEmail}
+        setShowVerifyEmail={setShowVerifyEmail}
+      />
       <div className="grid lg:grid-cols-2 items-center  gap-10">
         <div className="flex items-center gap-4">
           {" "}

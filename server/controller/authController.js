@@ -2,6 +2,94 @@ import User from "../model/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Metrics from "../model/metrics.js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { sendEmail } from "../config/notification.js";
+
+const __dirname = path.resolve();
+export const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (user.isVerified) {
+      return res.status(400).json({ message: "Email already verified" });
+    }
+    user.isVerified = true;
+    await user.save();
+    return res
+      .status(200)
+      .json({ message: "Email verified successfully", user });
+  } catch (error) {
+    console.log("error", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const verifyEmailToken = async (req) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return { status: 404, message: "User not found" };
+    }
+    const verifyEmailToken = jwt.sign(
+      { userId: user._id },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
+    const FRONTEND_URL = process.env.FRONTEND_URL;
+
+    const verifyEmailLink = `${FRONTEND_URL}/verify-email/${verifyEmailToken}`;
+
+    const templatePath = path.join(
+      __dirname,
+      "emailTemplates/verify-email.html"
+    );
+
+    let htmlContent;
+    try {
+      htmlContent = fs.readFileSync(templatePath, "utf-8");
+    } catch (error) {
+      console.log("Error reading template file", error);
+      return { status: 500, message: "Internal Server Error" };
+    }
+    htmlContent = htmlContent
+      .replace("{{firstName}}", user.firstName)
+      .replace("{{verificationLink}}", verifyEmailLink)
+      .replace(/{{APP_NAME}}/g, process.env.APP_NAME);
+
+    await sendEmail(user.email, "Verify your email", htmlContent);
+    return { status: 200, message: "Verification email sent" };
+  } catch (error) {
+    console.log(error);
+    return { status: 500, message: "Internal Server Error" };
+  }
+};
+
+export const resendVerificationEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const emailResponse = await verifyEmailToken(req);
+    if (emailResponse.status !== 200) {
+      return res.status(emailResponse.status).json(emailResponse.message);
+    }
+    return res.status(200).json({ message: "Verification email sent" });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const createUser = async (req, res) => {
   try {
     const { firstName, username, email, password, metricsData } = req.body;
@@ -33,7 +121,12 @@ export const createUser = async (req, res) => {
     //   // secure: true,
     //   sameSite: "none",
     // });
-
+    const emailResponse = await verifyEmailToken(req);
+    if (emailResponse.status !== 200) {
+      return res
+        .status(emailResponse.status)
+        .json({ message: emailResponse.message, token, user: newUser });
+    }
     return res
       .status(201)
       .json({ message: "User created successfully", token, user: newUser });

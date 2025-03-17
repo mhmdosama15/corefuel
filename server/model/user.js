@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       ref: "food",
       required: false,
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     metrics: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "metrics",

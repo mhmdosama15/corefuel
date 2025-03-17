@@ -27,6 +27,7 @@ import axios from "axios";
 import { BACKEND_URL } from "./utils";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { setUserMetrics } from "./redux/userSlice";
+import VerifyEmail from "./pages/auth/VerifyEmail";
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
           <Route path="/starter/*" element={<StarterPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
           {/* Protected Routes  */}
           <Route

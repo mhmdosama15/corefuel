@@ -10,7 +10,7 @@ const GridCard = ({ title, picture }) => {
           className="h-full w-full xl:max-h-[17rem] xl:max-w-[20rem] rounded-lg object-cover"
         />
       </div>
-      <p className=" text-xl">{title}</p>
+      <p className=" text-blue-700 font-bold text-xl">{title}</p>
     </div>
   );
 };
