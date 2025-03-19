@@ -28,6 +28,8 @@ import { BACKEND_URL } from "./utils";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { setUserMetrics } from "./redux/userSlice";
 import VerifyEmail from "./pages/auth/VerifyEmail";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -67,7 +69,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify-email/:token" element={<VerifyEmail />} />
-
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           {/* Protected Routes  */}
           <Route
             path="/dashboard"

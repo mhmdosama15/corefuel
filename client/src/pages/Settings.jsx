@@ -22,6 +22,9 @@ const Settings = ({ authenticateUser }) => {
   const [nameSuccess, setNameSuccess] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState(false);
   const [passwordSuccess, setPasswordSuccess] = useState(false);
+
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -79,6 +82,7 @@ const Settings = ({ authenticateUser }) => {
       }
     } catch (error) {
       console.log(error);
+      setEmailError(error.response.data.message);
     }
   };
   const updatePassword = async () => {
@@ -179,6 +183,7 @@ const Settings = ({ authenticateUser }) => {
             {emailSuccess && (
               <div className="text-green-500">{emailSuccess}</div>
             )}
+            {emailError && <div className="text-red-500">{emailError}</div>}
           </div>
         )}
         <button

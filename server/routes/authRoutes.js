@@ -3,7 +3,9 @@ import {
   addUsername,
   createUser,
   loginUser,
+  requestResetPassword,
   resendVerificationEmail,
+  resetPassword,
   verifyEmail,
   verifyUser,
 } from "../controller/authController.js";
@@ -17,7 +19,8 @@ router.post("/login", loginUser);
 router.patch("/update", verifyUser, updateUserData);
 router.get("/verify-email/:token", verifyEmail);
 router.post("/resend-verification-email", resendVerificationEmail);
-
+router.post("/request-reset-password", requestResetPassword);
+router.post("/reset-password", resetPassword);
 // user
 router.get("/", verifyUser, getUserData);
 export default router;

@@ -48,7 +48,7 @@ const Dashboard = () => {
       const response = await axios.get(`${BACKEND_URL}/api/user/get-calories`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(response.data);
+
       if (response.status === 200) {
         dispatch(setUserDailyGoals(response.data.dailyGoals));
       }
@@ -80,7 +80,7 @@ const Dashboard = () => {
         <p className="italic  ">{quote}</p>
       </div>
       <div className="flex items-center justify-end">
-        <h2>1st Day streak</h2>
+        {/* <h2>1st Day streak</h2> */}
       </div>
       <div className="grid lg:grid-cols-2 gap-10">
         <CaloriesCard />

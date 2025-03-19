@@ -60,7 +60,12 @@ const Navbar = () => {
       >
         <div className="flex flex-col h-full pt-2 lg:pt-4 w-full">
           <div className="px-4 lg:px-30 pb-2 lg:pb-4 flex items-center justify-between w-full">
-            <Link to={"/"} className="text-2xl text-white">
+            <Link
+              to={"/"}
+              className={`text-2xl ${
+                isWhiteBg ? "text-blue-500" : "text-white"
+              }`}
+            >
               CoreFuel
             </Link>
             <div className="lg:hidden flex">

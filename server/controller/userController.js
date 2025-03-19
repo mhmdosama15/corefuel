@@ -1,6 +1,7 @@
 import { generateMotivationalQuote } from "../api.js";
 import User from "../model/user.js";
 import bcrypt from "bcrypt";
+import { verifyEmailToken } from "./authController.js";
 
 export const getUserData = async (req, res) => {
   try {
@@ -80,7 +81,7 @@ export const updateUserData = async (req, res) => {
     }
     const updatedData = {
       ...(username && { username }),
-      ...(email && { email }),
+      ...(email && { email, isVerified: false }),
       ...(password && { password: hashPassword }),
     };
     const updatedUser = await User.findByIdAndUpdate(userId, updatedData, {
@@ -90,8 +91,18 @@ export const updateUserData = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found", updatedUser });
     }
-    console.log(updatedUser);
-    return res.status(200).json({ message: "User data updated successfully" });
+    if (email) {
+      const emailResponse = await verifyEmailToken(req);
+      if (emailResponse.status !== 200) {
+        return res
+          .status(emailResponse.status)
+          .json({ message: emailResponse.message });
+      }
+    }
+
+    return res
+      .status(200)
+      .json({ message: "User data updated successfully", user: updatedUser });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal Server Error" });

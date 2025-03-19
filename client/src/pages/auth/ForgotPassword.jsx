@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ForgotPasswordForm from "../../components/forms/ForgotPasswordForm";
-import CloseButtonHeader from "../../components/buttons/CloseButtonHeader";
-import BASE_URL from "../../../apiConfig";
+import { BACKEND_URL } from "../../utils";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +16,7 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/auth/request-reset-password`,
+        `${BACKEND_URL}/api/auth/request-reset-password`,
         { email }
       );
       if (response.status === 200) {
@@ -88,7 +87,6 @@ const ForgotPassword = () => {
   }, [resendTimer]);
   return (
     <div className="flex flex-col gap-20  w-full pt-10 px-8 lg:px-24">
-      <CloseButtonHeader />
       <div className="flex flex-col gap-8 pt-32 items-center justify-evenly  ">
         <div className="flex flex-col items-center w-full md:w-1/2 lg:w-auto   h-full lg:justify-center gap-2">
           <div className="flex flex-col w-full gap-4">
@@ -102,18 +100,67 @@ const ForgotPassword = () => {
           </div>
         </div>
         <div className=" w-[0.08px] h-full bg-[#343333]"></div>
-        <ForgotPasswordForm
-          handleSubmit={handleSubmit}
-          showError={showError}
-          error={error}
-          showSuccess={showSuccess}
-          success={success}
-          email={email}
-          handleResend={handleResend}
-          resendTimer={resendTimer}
-          loading={loading}
-          setEmail={setEmail}
-        />
+        <div className="w-full md:w-1/2 lg:w-auto">
+          <form className="" onSubmit={handleSubmit}>
+            {showError && (
+              <div
+                className={`text-red-500 text-sm mt-1 pb-4 transition-opacity ease-in-out  duration-1000 ${
+                  showError ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {error}
+              </div>
+            )}
+            {showSuccess && (
+              <div
+                className={`text-green-500  md:w-96 text-sm mt-1 pb-4 transition-opacity ease-in-out  duration-1000 ${
+                  showSuccess ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                {success}
+              </div>
+            )}
+            <div className="flex flex-col gap-2">
+              <label id="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="border rounded border-[#dadada] px-4 py-2"
+              />
+            </div>
+
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-blue-700 py-2 text-center w-full flex text-white items-center justify-center lg:w-96 rounded-lg"
+              >
+                {loading ? (
+                  <AiOutlineLoading3Quarters className="spin text-2xl" />
+                ) : (
+                  "Submit"
+                )}
+              </button>
+            </div>
+            <div className="pt-4 flex gap-1 justify-end">
+              <p>Didn't receive an email?</p>
+              <button
+                onClick={handleResend}
+                disabled={resendTimer > 0 || loading}
+                className={`${
+                  resendTimer > 0
+                    ? "cursor-not-allowed text-gray-400"
+                    : "hover:text-blue-700 hover:underline cursor-pointer"
+                }`}
+              >
+                Resend {resendTimer > 0 && `(${resendTimer}s)`}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

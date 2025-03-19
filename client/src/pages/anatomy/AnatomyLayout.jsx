@@ -9,7 +9,7 @@ const AnatomyLayout = () => {
   const [exercises, setExercises] = useState([]);
   const subCategories = {
     chest: ["upper pec", "middle pec", "lower pec"],
-    legs: ["hamstrings", "quadriceps", "calves"],
+    legs: ["hamstrings", "quads", "calves"],
     shoulders: ["front delt", "middle delt", "rear delt", "traps"],
     back: ["upper back", "middle back", "lower back"],
   };
@@ -42,9 +42,10 @@ const AnatomyLayout = () => {
 
       {/* Loop through each subcategory */}
       {subCategories[category]?.map((subCategoryName, index) => {
-        const filteredExercises = exercises.filter(
-          (exercise) =>
-            exercise.subCategory.toLowerCase() === subCategoryName.toLowerCase()
+        const filteredExercises = exercises.filter((exercise) =>
+          exercise.subCategory
+            .toLowerCase()
+            .includes(subCategoryName.toLowerCase())
         );
 
         return (
@@ -55,7 +56,7 @@ const AnatomyLayout = () => {
             <h3 className="text-xl font-semibold text-center py-4">
               {subCategoryName.length > 0 ? subCategoryName : "No exercises"}
             </h3>
-            <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1  md:grid-cols-2 w-full lg:grid-cols-3 gap-10">
               {filteredExercises.map((exercise) => (
                 <div
                   key={exercise._id}
@@ -69,13 +70,15 @@ const AnatomyLayout = () => {
                       loading="lazy"
                     />
                   </div>
-                  <h2 className="font-semibold pb-4">{exercise.title}</h2>
-                  <Link
-                    to={`/anatomy/details/${exercise._id}`}
-                    className="border px-4 py-2 rounded-lg border-[#dadada] bg-blue-500 hover:bg-blue-700 text-white"
-                  >
-                    View Exercise details
-                  </Link>
+                  <div className="px-4">
+                    <h2 className="font-semibold pb-4">{exercise.title}</h2>
+                    <Link
+                      to={`/anatomy/details/${exercise._id}`}
+                      className="border px-4 py-2 rounded-lg border-[#dadada] bg-blue-500 hover:bg-blue-700 text-white"
+                    >
+                      View Exercise details
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>

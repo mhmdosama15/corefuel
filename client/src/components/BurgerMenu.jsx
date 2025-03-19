@@ -65,6 +65,15 @@ const BurgerMenu = ({ closeMenu, isLoggedIn, logout }) => {
                 Body Anatomy
               </Link>
             </li>
+            <li className="text-lg ">
+              <Link
+                onClick={closeMenu}
+                to="/settings"
+                className="border px-4 py-1 rounded-lg border-[#dadada] bg-blue-500  text-white w-full"
+              >
+                Settings
+              </Link>
+            </li>
           </ul>
           <div className="mb-10">
             <button

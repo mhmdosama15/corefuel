@@ -22,17 +22,81 @@ app.use(
 );
 
 connectDB();
-/* SHOULDER
+/* LEGS
+Calf raise (calves)
+https://drive.google.com/file/d/1p4YgzFEPoy4fOqGpwv3qusVKxTNZFW3K/view?usp=sharing
+Setup: Stand on a calf raise machine or use a raised surface like a step. Place the balls of your feet on the edge, with your heels hanging off.
+Starting Position: Keep your legs straight and your torso upright. For additional resistance, you can hold a barbell or dumbbells.
+Raise: Push through the balls of your feet, lifting your body upwards as high as possible, extending your ankles.
+Lower: Slowly lower your body back down, allowing your heels to drop below the level of the step.
+Repeat: Maintain steady breathing and repeat for the desired reps.
+Tip: Focus on a full range of motion, both when raising and lowering your body, to target the calves effectively.
+
+
+Leg Curl (hamstrings)
+https://drive.google.com/file/d/1CvBNRJS_ODGNdTBdtg0NS2_fbhRT3KGj/view?usp=sharing
+Setup: Lie face down on the leg curl machine, ensuring that your knees align with the machine's pivot point. Place the pads on your lower calves just above your ankles.
+Starting Position: Keep your feet flexed and your legs fully extended. Hold the handles or place your hands at your sides for support.
+Curl: Curl your legs upwards by bending your knees, bringing your heels towards your glutes.
+Return: Slowly lower your legs back to the starting position, keeping the movement controlled.
+Repeat: Maintain steady breathing and repeat for the desired reps.
+Tip: Do not jerk or use momentum. Focus on engaging your hamstrings throughout the movement.
+
+
+Leg Extensions (quads)
+https://drive.google.com/file/d/1cFCyfEIqSq_jAZWZZ028q_s-4h0rcTbh/view?usp=sharing
+Leg Extension
+Setup: Sit on the leg extension machine with your back firmly against the pad. Adjust the pad so that it rests just above your ankles, and ensure your knees align with the machine's pivot point.
+Starting Position: Keep your feet flexed and your knees at a 90-degree angle. Your arms should rest comfortably at your sides or on the handles.
+Extension: Extend your legs slowly, pushing the pad upwards, ensuring your knees are fully straightened without locking them.
+Return: Lower the weight back to the starting position in a controlled manner, keeping tension on your quadriceps.
+Repeat: Maintain steady breathing and repeat for the desired reps.
+Tip: Focus on a slow and controlled movement, especially when lowering the weight, to maximize muscle engagement.
+
+Squats (quads, hamstrings)
+https://drive.google.com/file/d/1IuC_X9TcMYTyz07rczGEhY7Zk0GrEnLU/view?usp=sharing
+Setup: Stand with your feet shoulder-width apart, with your toes slightly turned outward. Place the barbell across your upper traps or use a smith machine if needed.
+Starting Position: Keep your chest up, core engaged, and your back straight. Position your knees in line with your toes.
+Descent: Lower your body by bending your hips and knees, keeping your chest lifted. Aim for a depth where your thighs are parallel to the floor, or go deeper if flexibility allows.
+Ascent: Push through your heels and extend your legs to return to the starting position.
+Repeat: Maintain steady breathing and repeat for the desired reps.
+Tip: Focus on depth and form rather than rushing the movement. Keep your knees aligned with your toes.
+
+
 
 */
 const videoData = [
   {
-    title: "Arnold Shoulder Press",
-    videoUrlID: "1NyhOdaOCZT4GkXwJhG1JIJ-vjYxtbslZ",
+    title: "Calf Raise",
+    videoUrlID: "1p4YgzFEPoy4fOqGpwv3qusVKxTNZFW3K",
     description:
-      "Setup: Sit on a bench with a dumbbell in each hand at chest height, palms facing you. Starting Position: Rotate your palms outward as you press the dumbbells overhead. Press: Fully extend your arms, turning your palms forward at the top. Lower: Reverse the motion back to the starting position. Repeat: Maintain steady breathing and repeat for desired reps. Tip: Focus on controlled rotation for better shoulder engagement.",
-    category: "shoulders",
-    subCategory: "front delt",
+      "Setup: Stand on a calf raise machine or use a raised surface like a step. Place the balls of your feet on the edge, with your heels hanging off. Starting Position: Keep your legs straight and your torso upright. For additional resistance, you can hold a barbell or dumbbells. Raise: Push through the balls of your feet, lifting your body upwards as high as possible, extending your ankles. Lower: Slowly lower your body back down, allowing your heels to drop below the level of the step. Repeat: Maintain steady breathing and repeat for the desired reps. Tip: Focus on a full range of motion, both when raising and lowering your body, to target the calves effectively.",
+    category: "legs",
+    subCategory: "calves",
+  },
+  {
+    title: "Leg Curl",
+    videoUrlID: "1CvBNRJS_ODGNdTBdtg0NS2_fbhRT3KGj",
+    description:
+      "Setup: Lie face down on the leg curl machine, ensuring that your knees align with the machine's pivot point. Place the pads on your lower calves just above your ankles. Starting Position: Keep your feet flexed and your legs fully extended. Hold the handles or place your hands at your sides for support. Curl: Curl your legs upwards by bending your knees, bringing your heels towards your glutes. Return: Slowly lower your legs back to the starting position, keeping the movement controlled. Repeat: Maintain steady breathing and repeat for the desired reps. Tip: Do not jerk or use momentum. Focus on engaging your hamstrings throughout the movement.",
+    category: "legs",
+    subCategory: "hamstrings",
+  },
+  {
+    title: "Leg Extensions",
+    videoUrlID: "1cFCyfEIqSq_jAZWZZ028q_s-4h0rcTbh",
+    description:
+      "Setup: Sit on the leg extension machine with your back firmly against the pad. Adjust the pad so that it rests just above your ankles, and ensure your knees align with the machine's pivot point. Starting Position: Keep your feet flexed and your knees at a 90-degree angle. Your arms should rest comfortably at your sides or on the handles. Extension: Extend your legs slowly, pushing the pad upwards, ensuring your knees are fully straightened without locking them. Return: Lower the weight back to the starting position in a controlled manner, keeping tension on your quadriceps. Repeat: Maintain steady breathing and repeat for the desired reps. Tip: Focus on a slow and controlled movement, especially when lowering the weight, to maximize muscle engagement.",
+    category: "legs",
+    subCategory: "quads",
+  },
+  {
+    title: "Squats",
+    videoUrlID: "1IuC_X9TcMYTyz07rczGEhY7Zk0GrEnLU",
+    description:
+      "Setup: Stand with your feet shoulder-width apart, with your toes slightly turned outward. Place the barbell across your upper traps or use a smith machine if needed. Starting Position: Keep your chest up, core engaged, and your back straight. Position your knees in line with your toes. Descent: Lower your body by bending your hips and knees, keeping your chest lifted. Aim for a depth where your thighs are parallel to the floor, or go deeper if flexibility allows. Ascent: Push through your heels and extend your legs to return to the starting position. Repeat: Maintain steady breathing and repeat for the desired reps. Tip: Focus on depth and form rather than rushing the movement. Keep your knees aligned with your toes.",
+    category: "legs",
+    subCategory: "quads, hamstrings",
   },
 ];
 
