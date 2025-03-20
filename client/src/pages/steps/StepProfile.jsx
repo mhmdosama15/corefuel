@@ -37,6 +37,7 @@ const StepProfile = () => {
               value="male"
               checked={gender === "male"}
               onChange={(e) => setGender(e.target.value)}
+              required
             />
             <label className="ml-2" htmlFor="male">
               Male
@@ -50,6 +51,7 @@ const StepProfile = () => {
               value="female"
               checked={gender === "female"}
               onChange={(e) => setGender(e.target.value)}
+              required
             />
             <label className="ml-2" htmlFor="female">
               Female
@@ -68,6 +70,7 @@ const StepProfile = () => {
             value={dob}
             onChange={(e) => setDob(e.target.value)}
             className="border bg-white p-2"
+            required
           />
         </div>
 
@@ -82,6 +85,7 @@ const StepProfile = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             className="border bg-white p-2"
+            required
           />
         </div>
 

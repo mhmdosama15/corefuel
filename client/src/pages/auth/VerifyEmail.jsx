@@ -22,7 +22,7 @@ const VerifyEmail = () => {
       }
       console.log(response);
     } catch (err) {
-      setError("Verification failed. Please try again later.");
+      setError(err.response.data.message);
       console.error("Error verifying email:", err);
     } finally {
       setIsLoading(false);

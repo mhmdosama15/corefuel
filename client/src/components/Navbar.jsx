@@ -59,7 +59,7 @@ const Navbar = () => {
         }`}
       >
         <div className="flex flex-col h-full pt-2 lg:pt-4 w-full">
-          <div className="px-4 lg:px-30 pb-2 lg:pb-4 flex items-center justify-between w-full">
+          <div className="px-4 2xl:container 2xl:mx-auto lg:px-30 pb-2 lg:pb-4 flex items-center justify-between w-full">
             <Link
               to={"/"}
               className={`text-2xl ${
@@ -114,43 +114,67 @@ const Navbar = () => {
           </div>
           {isLoggedIn && location.pathname !== "/signup/username" && (
             <div className="hidden lg:flex px-30  border border-transparent bg-blue-500   w-full">
-              <div className="flex items-center  text-white ">
+              <div className="flex items-center gap-2 px-30 xl:px-8 2xl:container 2xl:mx-auto  text-white ">
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/dashboard"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/dashboard"}
                 >
                   My HOME
                 </Link>
 
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/exercise"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/exercise"}
                 >
                   EXERCISE
                 </Link>
 
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/calories"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/calories"}
                 >
                   CALORIE
                 </Link>
 
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/nutrition"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/nutrition"}
                 >
                   NUTRITION
                 </Link>
 
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/form-check"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/form-check"}
                 >
                   FORM CHECK
                 </Link>
                 <Link
-                  className="hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6"
+                  className={`hover:bg-white text-nowrap hover:text-blue-500 py-3 px-6 ${
+                    location.pathname === "/body-anatomy"
+                      ? "bg-white text-blue-500"
+                      : ""
+                  }`}
                   to={"/body-anatomy"}
                 >
                   BODY ANATOMY

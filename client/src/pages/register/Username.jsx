@@ -8,8 +8,10 @@ const Username = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.patch(
         `${BACKEND_URL}/api/auth/add-username`,
@@ -28,23 +30,26 @@ const Username = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <div className="flex flex-col gap-10 items-center justify-center px-6 xl:px-0  h-screen w-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]"
+        className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-white shadow-md"
       >
         <div className="flex flex-col gap-2">
           <h2 className="font-bold">Create a username?</h2>
           <p className="text-sm">One gymrat added to the family</p>
           <input
             id="name"
-            className="bg-white rounded w-72 mt-6 px-4 py-2"
+            className="bg-white border border-[#dadada] rounded w-72 mt-6 px-4 py-2"
             placeholder="Enter username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div className="flex items-center gap-6 mt-6">

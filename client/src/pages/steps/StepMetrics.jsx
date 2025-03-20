@@ -33,6 +33,7 @@ const StepMetrics = () => {
           value={height}
           onChange={(e) => handleChange(e, setHeight, "height")}
           className="w-44 p-2 border bg-white border-gray-300 rounded"
+          required
         />
       </div>
       <div className="flex flex-col items-start gap-2">
@@ -47,6 +48,7 @@ const StepMetrics = () => {
           onChange={(e) => handleChange(e, setWeight, "weight")}
           placeholder="kg"
           className="w-44 p-2 border bg-white border-gray-300 rounded"
+          required
         />
       </div>
       <div className="flex flex-col items-start gap-2">
@@ -65,6 +67,7 @@ const StepMetrics = () => {
           onChange={(e) => handleChange(e, setGoalWeight, "goalWeight")}
           placeholder="kg"
           className="w-44 p-2 border bg-white border-gray-300 rounded"
+          required
         />
       </div>
     </div>

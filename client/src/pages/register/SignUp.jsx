@@ -103,6 +103,15 @@ const SignUp = () => {
       setLoading(false);
     }
   };
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    if (newPassword.length < 10) {
+      setError("Password must be at least 10 characters");
+    } else {
+      setError("");
+    }
+    setPassword(newPassword);
+  };
   return (
     <div className="flex flex-col gap-10 items-center px-6 xl:px-0 justify-center h-screen w-full">
       <div className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded-lg bg-white">
@@ -119,6 +128,7 @@ const SignUp = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="border w-full px-4 py-2 border-[#dadada] bg-white"
+                required
               />
             </div>
             <div className="flex flex-col items-start gap-2">
@@ -128,8 +138,9 @@ const SignUp = () => {
                 name="password"
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
                 className="border w-full px-4 py-2 border-[#dadada] bg-white"
+                required
               />
               <span className="pb-10 lg:pb-0">
                 Password must be at least 10 characters

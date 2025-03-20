@@ -13,8 +13,8 @@ const StarterPage = () => {
   const location = useLocation();
   const stepNumber = parseInt(location.pathname.split("-")[1]);
   return (
-    <div className="flex flex-col gap-10 items-center justify-center h-screen border px-6 xl:px-0  w-full">
-      <div className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-[#efefef]">
+    <div className="flex flex-col gap-10 items-center justify-center h-screen  px-6 xl:px-0  w-full">
+      <div className="flex flex-col lg:min-h-[32rem] lg:min-w-[32rem] lg:max-w-[32rem] p-6 border border-[#dadada] justify-between items-center text-center rounded bg-white shadow-md">
         <Routes>
           <Route path="step-1" element={<StepName />} />
           <Route path="step-2" element={<StepGoals />} />

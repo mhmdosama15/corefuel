@@ -43,7 +43,7 @@ const Calorie = () => {
   };
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30 gap-6 pt-10 lg:pt-20">
-      <div className="flex flex-col gap-8 items-center bg-[#efefef] p-4 rounded">
+      <div className="flex flex-col gap-8 items-center bg-white shadow-md border border-[#dadada] p-4 rounded">
         <h2 className="text-xl font-bold">Calorie Calculator</h2>
         <form
           className="flex flex-col gap-6 p-6 w-full lg:w-2/4"

@@ -25,7 +25,8 @@ const StepName = () => {
         id="name"
         value={firstName}
         onChange={handleChange}
-        className="bg-white rounded w-72 mt-6 px-4 py-2"
+        className="bg-white border border-[#dadada] rounded w-72 mt-6 px-4 py-2"
+        required
       />
     </div>
   );
