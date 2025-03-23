@@ -14,5 +14,9 @@
   { "name": "Leaning Reverse Press" },
   { "name": "Leaning Shoulder Curl" },
   { "name": "Shoulder Press" },
-  { "name": "Shrugs" }
+  { "name": "Shrugs" },
+  { "name": "Calf Raise" },
+  { "name": "Leg Curl" },
+  { "name": "Leg Extensions" },
+  { "name": "Squats" }
 ]

@@ -12,6 +12,8 @@ const AnatomyLayout = () => {
     legs: ["hamstrings", "quads", "calves"],
     shoulders: ["front delt", "middle delt", "rear delt", "traps"],
     back: ["upper back", "middle back", "lower back"],
+    arm: ["triceps", "biceps"],
+    core: ["abs", ""],
   };
   const fetchExercises = async () => {
     try {

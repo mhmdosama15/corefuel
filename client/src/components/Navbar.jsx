@@ -15,7 +15,7 @@ const Navbar = () => {
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
   console.log(isLoggedIn);
   const [isBurgerMenu, setIsBurgerMenu] = useState(false);
-  const categories = ["chest", "back", "shoulders", "legs"];
+  const categories = ["chest", "back", "shoulders", "legs", "arm", "core"];
   const paths = [
     "/dashboard",
     "/exercise",
