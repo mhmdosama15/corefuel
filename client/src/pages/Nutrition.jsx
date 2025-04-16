@@ -154,7 +154,7 @@ const Nutrition = () => {
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-10 lg:pb-30 gap-2 pt-10 lg:pt-24">
       {/* Breakfast Section */}
-      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
+      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b font-bold border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Breakfast</p>
           <Link
@@ -169,13 +169,13 @@ const Nutrition = () => {
       </div>
 
       {/* Lunch Section */}
-      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
+      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b font-bold border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Lunch</p>
           <Link
             to={"/food"}
             state={{ foodType: "lunch" }}
-            className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
+            className="border border-[#dadada] text-nowrap px-4 font-bold py-1 rounded-md bg-blue-500 text-white"
           >
             Add Food
           </Link>
@@ -184,13 +184,13 @@ const Nutrition = () => {
       </div>
 
       {/* Dinner Section */}
-      <div className="flex flex-col lg:flex-row items-start border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
+      <div className="flex flex-col lg:flex-row items-start border-b border-b-[#dadada]  font-bold gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Dinner</p>
           <Link
             to={"/food"}
             state={{ foodType: "dinner" }}
-            className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md bg-blue-500 text-white"
+            className="border border-[#dadada] text-nowrap px-4 py-1 rounded-md font-bold bg-blue-500 text-white"
           >
             Add Food
           </Link>
@@ -199,7 +199,7 @@ const Nutrition = () => {
       </div>
 
       {/* Snacks Section */}
-      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
+      <div className="flex flex-col lg:flex-row items-start lg:justify-between border-b font-bold border-b-[#dadada] gap-6 pb-10 lg:gap-44">
         <div className="flex flex-col gap-4">
           <p>Snacks</p>
           <Link

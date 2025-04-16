@@ -13,7 +13,7 @@ const AnatomyLayout = () => {
     shoulders: ["front delt", "middle delt", "rear delt", "traps"],
     back: ["upper back", "middle back", "lower back"],
     arm: ["triceps", "biceps"],
-    core: ["abs", ""],
+    core: ["abs", "obliques","hip flexors"],
   };
   const fetchExercises = async () => {
     try {

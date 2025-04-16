@@ -52,13 +52,13 @@ const FormCheck = () => {
   }, []);
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30  gap-4 pt-10 lg:pt-24">
-      <h2 className="text-xl">Form Check</h2>
+      <h2 className="text-3xl font-bold">Form Check</h2>
       <p>Enter the exercise you want to review for form checking.</p>
       <div className="grid xl:grid-cols-3 gap-8">
         <form onSubmit={handleSubmit} className=" flex  gap-10     ">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3">
-              <label htmlFor="exercise-name" className="text-lg font-bold">
+              <label htmlFor="exercise-name" className="text-lg ">
                 Exercise Name:
               </label>
               {/* <input
@@ -72,6 +72,7 @@ const FormCheck = () => {
                 setName={setName}
                 autocompleteValue={autocompleteValue}
                 setAutocompleteValue={setAutocompleteValue}
+                loading={loading}
               />
             </div>
             {/* <div className="flex flex-col gap-3">
@@ -112,15 +113,10 @@ const FormCheck = () => {
                <span>kcal</span>
              </div>
            </div> */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-4 mt-6 py-2 rounded bg-blue-500 text-white w-32"
-            >
-              Search
-            </button>
+         
           </div>
         </form>
+     
         {loading ? (
           <p>Loading...</p>
         ) : (

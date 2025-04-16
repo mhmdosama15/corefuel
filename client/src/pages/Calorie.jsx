@@ -44,12 +44,12 @@ const Calorie = () => {
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-20 lg:pb-30 gap-6 pt-10 lg:pt-20">
       <div className="flex flex-col gap-8 items-center bg-white shadow-md border border-[#dadada] p-4 rounded">
-        <h2 className="text-xl font-bold">Calorie Calculator</h2>
+        <h2 className="text-3xl font-bold">Calorie Calculator</h2>
         <form
           className="flex flex-col gap-6 p-6 w-full lg:w-2/4"
           onSubmit={calculateCalories}
         >
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col font-bold gap-1">
             <label htmlFor="duration-cardio">
               Duration of Cardiovascular activity
             </label>
@@ -63,7 +63,7 @@ const Calorie = () => {
               onChange={(e) => setCardio(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col  font-bold gap-1">
             <label htmlFor="duration-workout">Duration of workout</label>
             <input
               type="number"
@@ -75,7 +75,7 @@ const Calorie = () => {
               onChange={(e) => setWorkout(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col font-bold gap-1">
             <label htmlFor="weight">Weight (kg)</label>
             <input
               type="number"
@@ -87,7 +87,7 @@ const Calorie = () => {
               onChange={(e) => setWeight(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col font-bold gap-1">
             <label htmlFor="height">Height (cm)</label>
             <input
               type="number"
@@ -107,7 +107,7 @@ const Calorie = () => {
           </button>
         </form>
         {caloriesBurned !== null && (
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col font-bold gap-1">
             <p>Total Calories Burned throughout the day</p>
             <div className="border text-center p-4 rounded bg-white border-[#dadada]">
               {caloriesBurned} kcal

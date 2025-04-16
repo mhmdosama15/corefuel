@@ -55,11 +55,11 @@ const Exercise = () => {
   return (
     <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-24">
       <div className="flex flex-col lg:flex-row items-start border-b border-b-[#dadada] gap-6 pb-10 lg:gap-44">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col font-bold gap-4">
           <p>Exercises</p>
           <Link
             to={"/exercise/create"}
-            className="border text-nowrap border-[#dadada] px-4 py-2 hover:bg-blue-700 bg-blue-500 text-white"
+            className="border text-nowrap font-bold border-[#dadada] px-4 py-2 hover:bg-blue-700 bg-blue-500 text-white"
           >
             Add Exercise
           </Link>
@@ -102,7 +102,7 @@ const Exercise = () => {
           <p className="border px-4 py-1 rounded">1</p>
         </div>
       </div> */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col font-bold gap-4">
         <p>Exercise Notes</p>
         <div className="flex justify-end">
           <button
