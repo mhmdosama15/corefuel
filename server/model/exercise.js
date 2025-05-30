@@ -15,14 +15,18 @@ const exerciseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    exerciseDuration: {
-      type: String,
-      required: true,
-    },
-    caloriesBurned: {
+    sets: {
       type: Number,
       required: true,
     },
+    reps: {
+      type: Number,
+      required: true,
+    },
+    // caloriesBurned: {
+    //   type: Number,
+    //   required: true,
+    // },
   },
   { timestamps: true }
 );

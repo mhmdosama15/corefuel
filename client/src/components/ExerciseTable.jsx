@@ -54,8 +54,9 @@ const ExerciseTable = () => {
             <th className="border px-4 py-2"></th>
             <th className="border px-4 py-2">Exercise Name</th>
             <th className="border px-4 py-2">Exercise Type</th>
-            <th className="border px-4 py-2">Minutes</th>
-            <th className="border px-4 py-2">Calories Burned</th>
+            <th className="border px-4 py-2">Sets</th>
+            <th className="border px-4 py-2">Reps</th>
+    
             {!isDashboard && <th className="border px-4 py-2">Actions</th>}
           </tr>
         </thead>
@@ -66,10 +67,9 @@ const ExerciseTable = () => {
                 <td className="border px-4 py-2">{index + 1}</td>
                 <td className="border px-4 py-2">{exercise.exerciseName}</td>
                 <td className="border px-4 py-2">{exercise.exerciseType}</td>
-                <td className="border px-4 py-2">
-                  {exercise.exerciseDuration}
-                </td>
-                <td className="border px-4 py-2">{exercise.caloriesBurned}</td>
+                <td className="border px-4 py-2"> {exercise.sets}</td>
+                <td className="border px-4 py-2"> {exercise.reps}</td>
+              
                 {/* <td className="border px-4 py-2">
             {new Date(exercise.createdAt).toLocaleDateString()}
           </td> */}

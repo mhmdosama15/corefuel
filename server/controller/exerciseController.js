@@ -10,15 +10,16 @@ export const createExercise = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const { exerciseName, exerciseType, exerciseDuration, caloriesBurned } =
+    const { exerciseName, exerciseType, sets, reps } =
       req.body;
 
     const exercise = new Exercise({
       userId,
       exerciseName,
       exerciseType,
-      exerciseDuration,
-      caloriesBurned,
+      sets,
+      reps,
+      
     });
 
     await exercise.save();
@@ -40,12 +41,13 @@ export const updateExercise = async (req, res) => {
     if (!exercise) {
       return res.status(404).json({ message: "Exercise not found" });
     }
-    const { exerciseName, exerciseType, exerciseDuration, caloriesBurned } =
+    const { exerciseName, exerciseType, sets } =
       req.body;
     exercise.exerciseName = exerciseName;
     exercise.exerciseType = exerciseType;
-    exercise.exerciseDuration = exerciseDuration;
-    exercise.caloriesBurned = caloriesBurned;
+    exercise.sets = sets;
+    exercise.reps = reps;
+
     await exercise.save();
     return res
       .status(200)

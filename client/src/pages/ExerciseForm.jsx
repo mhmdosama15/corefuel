@@ -6,8 +6,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 const ExerciseForm = () => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseType, setExerciseType] = useState("cardio");
-  const [exerciseDuration, setExerciseDuration] = useState("");
-  const [caloriesBurned, setCaloriesBurned] = useState("");
+  const [sets,setSets] = useState("0");
+  const [reps,setReps] = useState("0");
   const [isEditData, setIsEditData] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -20,8 +20,9 @@ const ExerciseForm = () => {
       setIsEditData(true);
       setExerciseName(exercise.exerciseName);
       setExerciseType(exercise.exerciseType);
-      setExerciseDuration(exercise.exerciseDuration);
-      setCaloriesBurned(exercise.caloriesBurned);
+      setSets(exercise.sets);
+      setReps(exercise.reps);
+      
     }
   }, [exercise]);
   const { id } = useParams();
@@ -31,8 +32,9 @@ const ExerciseForm = () => {
     console.log("data sent", {
       exerciseName,
       exerciseType,
-      exerciseDuration,
-      caloriesBurned,
+      sets,
+      reps,
+      
     });
     if (isEditData) {
       try {
@@ -41,8 +43,9 @@ const ExerciseForm = () => {
           {
             exerciseName,
             exerciseType,
-            exerciseDuration,
-            caloriesBurned,
+            sets,
+            reps,
+            
           },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -62,8 +65,9 @@ const ExerciseForm = () => {
           {
             exerciseName,
             exerciseType,
-            exerciseDuration,
-            caloriesBurned,
+            sets,
+            reps,
+            
           },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -71,8 +75,8 @@ const ExerciseForm = () => {
         if (response.status === 200) {
           setExerciseName("");
           setExerciseType("cardio");
-          setExerciseDuration("");
-          setCaloriesBurned("");
+          setSets(0);
+          setReps(0);
           navigate("/exercise");
         }
       } catch (error) {
@@ -119,22 +123,38 @@ const ExerciseForm = () => {
             </select>
           </div>
           <div className="flex flex-col gap-3">
-            <label htmlFor="mins" className="text-lg font-bold">
-              How Long:
+            <label htmlFor="sets" className="text-lg font-bold">
+              Number of sets:
             </label>
             <div className="flex items-center gap-2">
               <input
-                id="mins"
+                id="sets"
                 type="number"
                 className="bg-white border border-[#dadada] rounded  px-4 py-2"
-                value={exerciseDuration}
-                onChange={(e) => setExerciseDuration(e.target.value)}
+                value={sets}
+                onChange={(e) => setSets(e.target.value)}
                 required
               />
-              <span>Minutes</span>
+              <span>Sets</span>
+            </div>
+            <div className="flex flex-col gap-3">
+              <label htmlFor="reps" className="text-lg font-bold">
+                Number of reps:
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+              id="reps"
+              type="number"
+              className="bg-white border border-[#dadada] rounded  px-4 py-2"
+              value={reps}
+              onChange={(e) => setReps(Number(e.target.value))}
+              required
+              />
+              <span>Reps</span>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+        {/* <div className="flex flex-col gap-3">
             <label htmlFor="calories" className="text-lg font-bold">
               Calories Burned:
             </label>
@@ -148,7 +168,7 @@ const ExerciseForm = () => {
               />
               <span>kcal</span>
             </div>
-          </div>
+          </div> */}
           <button
             type="submit"
             disabled={loading}
