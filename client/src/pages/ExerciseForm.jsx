@@ -112,7 +112,7 @@ const ExerciseForm = () => {
               Exercise type:
             </label>
             <select
-              id="exericse-type"
+              id="exercise-type"
               className="bg-white border border-[#dadada] rounded w-72  px-4 py-2"
               value={exerciseType}
               onChange={(e) => setExerciseType(e.target.value)}
@@ -142,12 +142,12 @@ const ExerciseForm = () => {
                 Number of reps:
               </label>
               <div className="flex items-center gap-2">
-                <input
+              <input
               id="reps"
               type="number"
               className="bg-white border border-[#dadada] rounded  px-4 py-2"
               value={reps}
-              onChange={(e) => setReps(Number(e.target.value))}
+              onChange={(e) => setReps(e.target.value)}
               required
               />
               <span>Reps</span>

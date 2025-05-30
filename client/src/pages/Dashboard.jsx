@@ -63,7 +63,7 @@ const Dashboard = () => {
     getCalorieIntake();
   }, []);
   return (
-    <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-20">
+    <div className="flex flex-col px-6 lg:px-30 pb-30 gap-6 pt-10 lg:pt-20 ">
       <EmailPrompt
         showVerifyEmail={showVerifyEmail}
         setShowVerifyEmail={setShowVerifyEmail}
@@ -86,7 +86,7 @@ const Dashboard = () => {
         <CaloriesCard />
         <Macros />
       </div>
-      <div className="flex flex-col gap-3 border min-h-60 max-h-60 overflow-scroll hide-scrollbar rounded bg-white shadow-md border-[#dadada] p-4">
+      <div className="flex flex-col gap-3 border min-h-60 max-h-60 overflow-scroll hide-scrollbar rounded bg-white shadow-md border-[#22168f] p-4">
         <h2>Workout Plan</h2>
         <div className=" ">
           <h2 className="pb-2">Latest Workout exercises</h2>

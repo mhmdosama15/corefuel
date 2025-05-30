@@ -37,10 +37,10 @@ const Anatomy = ({}) => {
           className=" bg-white group shadow-sm border h-96 w-full lg:w-80 lg:max-w-80 overflow-hidden border-[#dadada] rounded"
         >
           <img
-            src={`https://lh3.googleusercontent.com/d/${exerciseData.videoUrlID}=s600`}
+             src={`/assets/exercise-thumbnails/${exerciseData._id}.PNG`}
             alt={exerciseData.title}
             className="w-full h-full group-hover:scale-105 transition duration-300 object-cover"
-            loading="lazy"
+            // loading="lazy"
           />
         </Link>
         <div className="p-6 bg-white shadow-sm border h-96 overflow-scroll hide-scrollbar border-[#dadada] rounded">

@@ -130,7 +130,7 @@ const FormCheck = () => {
                 className=" bg-white group shadow-sm border h-96 overflow-hidden border-[#dadada] rounded"
               >
                 <img
-                  src={`https://lh3.googleusercontent.com/d/${data.videoUrlID}=s600`}
+                   src={`/assets/exercise-thumbnails/${data._id}.PNG`}
                   alt={data.title}
                   className="w-full h-full group-hover:scale-105 transition duration-300 object-cover "
                   loading="lazy"

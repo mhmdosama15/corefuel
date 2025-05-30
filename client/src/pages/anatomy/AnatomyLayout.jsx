@@ -66,10 +66,10 @@ const AnatomyLayout = () => {
                 >
                   <div className="mb-2">
                     <img
-                      src={`https://lh3.googleusercontent.com/d/${exercise.videoUrlID}=s600`}
+  src={`/assets/exercise-thumbnails/${exercise._id}.PNG`}
                       alt={exercise.title}
                       className="w-full h-96 object-cover "
-                      loading="lazy"
+                      // loading="lazy"
                     />
                   </div>
                   <div className="px-4">
